@@ -191,6 +191,7 @@ export const POST = async (req: NextRequest) => {
               console.log(`[SUBSCRIPTION] Automation ${automation.name} processed:`, result.message);
             } else {
               console.error(`[SUBSCRIPTION] Failed to process automation ${automation.name}:`, response.status);
+              console.log(response);
             }
           } catch (automationError) {
             console.error(`[SUBSCRIPTION] Error processing automation ${automation.name}:`, automationError);

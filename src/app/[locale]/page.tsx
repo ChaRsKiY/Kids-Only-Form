@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useRef, useState, useLayoutEffect, useEffect, useCallback } from 'react';
-import SignatureCanvas from 'react-signature-canvas';
+import dynamic from 'next/dynamic';
+import type SignatureCanvasType from 'react-signature-canvas';
 import { useTranslations, useLocale } from 'next-intl';
-import { StandaloneSearchBox, LoadScript } from '@react-google-maps/api';
 import { MdOutlineDelete } from 'react-icons/md';
 //import { Lexend } from 'next/font/google';
 import { Input } from '@/components/ui/input';
@@ -11,6 +11,17 @@ import { formSchema, childSchema, FormType } from '@/schemas/subscription-form.s
 import { Child, ErrorsType } from '@/types/child';
 import { Button, Checkbox, Select, PhoneInput, SubscriptionModal, DateInput } from '@/components/ui';
 import { MdOutlineAdd } from 'react-icons/md';
+
+// Lazy heavy components (keep Google Maps loading unconditional as requested)
+const SignatureCanvas = dynamic(async () => {
+  const mod = await import('react-signature-canvas');
+  const Component = mod.default;
+  return React.forwardRef<SignatureCanvasType, any>((props, ref) => (
+    <Component ref={ref as any} {...props} />
+  ));
+}, { ssr: false });
+const LoadScript = dynamic<any>(() => import('@react-google-maps/api').then(m => m.LoadScript), { ssr: false });
+const StandaloneSearchBox = dynamic<any>(() => import('@react-google-maps/api').then(m => m.StandaloneSearchBox), { ssr: false });
 
 
 interface Branch {
@@ -48,6 +59,13 @@ const initialForm: FormType = {
 
 type Gender = 'male' | 'female' | 'other';
 
+const languages = [
+  { code: 'en', label: 'English' },
+  { code: 'de', label: 'Deutsch' },
+  { code: 'ru', label: 'Русский' },
+  { code: 'sk', label: 'Slovenčina' },
+];
+
 
 
 export default function HomePage() {
@@ -58,7 +76,7 @@ export default function HomePage() {
   const [hasAddress, setHasAddress] = useState<boolean>(false);
   const [isEmpty, setIsEmpty] = useState(true);
   const [canvasSize, setCanvasSize] = useState({ width: 0, height: 0 });
-  const sigCanvasRef = useRef<SignatureCanvas | null>(null);
+  const sigCanvasRef = useRef<SignatureCanvasType | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [searchBox, setSearchBox] = useState<google.maps.places.SearchBox | null>(null);
   const [selectedPlace, setSelectedPlace] = useState<google.maps.places.PlaceResult | null>(null);
@@ -101,15 +119,23 @@ export default function HomePage() {
   };
 
   useLayoutEffect(() => {
-    function updateSize() {
-      if (containerRef.current) {
-        const rect = containerRef.current.getBoundingClientRect();
-        setCanvasSize({ width: Math.floor(rect.width), height: Math.floor(rect.height) });
-      }
-    }
-    updateSize();
-    window.addEventListener('resize', updateSize);
-    return () => window.removeEventListener('resize', updateSize);
+    let rafId: number | null = null;
+    const scheduleUpdate = () => {
+      if (rafId != null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        if (containerRef.current) {
+          const rect = containerRef.current.getBoundingClientRect();
+          setCanvasSize({ width: Math.floor(rect.width), height: Math.floor(rect.height) });
+        }
+      });
+    };
+    scheduleUpdate();
+    window.addEventListener('resize', scheduleUpdate);
+    return () => {
+      window.removeEventListener('resize', scheduleUpdate);
+      if (rafId != null) cancelAnimationFrame(rafId);
+    };
   }, []);
 
 
@@ -374,13 +400,6 @@ export default function HomePage() {
   }, [selectedPlace]);
 
   // react-datepicker locales removed; using custom DateInput
-
-  const languages = [
-    { code: 'en', label: 'English' },
-    { code: 'de', label: 'Deutsch' },
-    { code: 'ru', label: 'Русский' },
-    { code: 'sk', label: 'Slovenčina' },
-  ];
 
   const resetIdleTimers = useCallback(() => {
     if (idleTimeoutRef.current) clearTimeout(idleTimeoutRef.current);
@@ -683,7 +702,7 @@ export default function HomePage() {
                   <div>
                     {hasAddress && isMapsReady ? (
                       <StandaloneSearchBox
-                        onLoad={ref => setSearchBox(ref)}
+                        onLoad={(ref: google.maps.places.SearchBox) => setSearchBox(ref)}
                         onPlacesChanged={() => {
                           const places = searchBox?.getPlaces();
                           if (places && places.length > 0) {
@@ -824,6 +843,7 @@ export default function HomePage() {
         )}
 
         <LoadScript
+          id="google-maps-script"
           googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
           libraries={["places"]}
           onLoad={() => setIsMapsReady(true)}
