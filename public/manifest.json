@@ -1,0 +1,20 @@
+{
+  "name": "Kids Only Subscription Form",
+  "short_name": "Kids Only Subscription Form",
+  "description": "Kids Only Newsletter Subscription Form",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "scope": "/",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/Kids Only Logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

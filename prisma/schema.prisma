@@ -1,0 +1,127 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Admin {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  username String @unique
+  password String
+  createdAt DateTime @default(now())
+}
+
+model Branch {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  code        String   @unique // PD, SB, etc.
+  name        String   // Parndorf, Salzburg, etc.
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  subscriptions Subscription[]
+}
+
+model Subscription {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  firstName String
+  lastName  String
+  email     String
+  dob       DateTime
+  phone     Int?
+  street    String
+  postalCode Int
+  city       String
+  province   String
+  country    String
+  agree      Boolean
+  signature  String
+  branchId  String   @db.ObjectId
+  branch    Branch   @relation(fields: [branchId], references: [id])
+  children   Child[]
+  emailLogs EmailLog[]
+  createdAt  DateTime @default(now())
+}
+
+model Child {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  firstName String
+  lastName  String
+  gender    String
+  dob       DateTime  
+  subscriptionId String   @db.ObjectId
+  subscription   Subscription @relation(fields: [subscriptionId], references: [id])
+  createdAt      DateTime     @default(now())
+}
+
+model EmailTemplate {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  subject   String
+  content   String
+  jsonContent Json?
+  variables Json[]
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  campaigns EmailCampaign[]
+  automations EmailAutomation[]
+}
+
+model EmailCampaign {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  templateId      String?  @db.ObjectId
+  template        EmailTemplate? @relation(fields: [templateId], references: [id])
+  filters         Json
+  status          String   @default("draft") // draft, scheduled, sending, completed, failed
+  scheduledAt     DateTime?
+  sentAt          DateTime?
+  totalRecipients Int      @default(0)
+  sentCount       Int      @default(0)
+  failedCount     Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  emails          EmailLog[]
+}
+
+model EmailLog {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  campaignId  String?  @db.ObjectId
+  campaign    EmailCampaign? @relation(fields: [campaignId], references: [id])
+  automationId String? @db.ObjectId
+  automation  EmailAutomation? @relation(fields: [automationId], references: [id])
+  recipientId String   @db.ObjectId
+  recipient   Subscription @relation(fields: [recipientId], references: [id])
+  status      String   // sent, delivered, opened, clicked, failed
+  sentAt      DateTime @default(now())
+  openedAt    DateTime?
+  clickedAt   DateTime?
+  error       String?
+  createdAt   DateTime @default(now())
+}
+
+model EmailAutomation {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  trigger     String   // subscription, birthday, anniversary, holiday, custom
+  templateId  String?  @db.ObjectId
+  template    EmailTemplate? @relation(fields: [templateId], references: [id])
+  isActive    Boolean  @default(true)
+  conditions  Json     // { type: 'immediate' | 'delayed' | 'custom', delayHours?: number, delayDays?: number, customDate?: string, birthdayOffset?: number, holidayType?: string }
+  filters     Json     // Same structure as EmailCampaign filters
+  stats       Json     // { totalSent: number, totalFailed: number, lastTriggered?: string, nextTrigger?: string }
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  emailLogs   EmailLog[]
+}
