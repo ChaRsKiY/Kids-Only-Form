@@ -60,6 +60,16 @@
     "tryAgain": "Prosím, skúste to znova alebo nás kontaktujte.",
     "close": "Zatvoriť"
   },
+  "idle": {
+    "title": "Stále ste s nami?",
+    "description": "Všimli sme si, že ste odišli. Pre bezpečnosť vašich údajov vyčistíme formulár o {seconds} sekúnd. Klepnite kdekoľvek pre pokračovanie!",
+    "tapAnywhere": "Klepnite kdekoľvek pre pokračovanie!",
+    "seconds": "s"
+  },
+  "maps": {
+    "errorTitle": "Google Maps sa nepodarilo načítať",
+    "errorDescription": "API kľúč chýba alebo je prístup zablokovaný. Adresu môžete zadať manuálne."
+  },
   "errors": {
     "required": "Toto pole je povinné",
     "invalidEmail": "Neplatná e-mailová adresa",
@@ -74,7 +84,8 @@
     "invalidChildrenCount": "Neplatný počet detí",
     "incompleteChildData": "Prosím, vyplňte všetky údaje pre každé dieťa",
     "serverError": "Nastala chyba servera",
-    "networkError": "Nastala sieťová chyba"
+    "networkError": "Nastala sieťová chyba",
+    "invalidCaptcha": "Kontrola bota zlyhala. Skúste znova."
   },
   "admin": {
     "login": {

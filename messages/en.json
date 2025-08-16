@@ -60,6 +60,16 @@
     "tryAgain": "Please try again or contact us.",
     "close": "Close"
   },
+  "idle": {
+    "title": "Still with us?",
+    "description": "We noticed you’ve stepped away. To keep your info safe, we’ll clear the form in {seconds} seconds. Tap anywhere to keep going!",
+    "tapAnywhere": "Tap anywhere to keep going!",
+    "seconds": "sec"
+  },
+  "maps": {
+    "errorTitle": "Google Maps failed to load",
+    "errorDescription": "API key is missing or access is blocked. You can still enter the address manually."
+  },
   "errors": {
     "required": "This field is required",
     "invalidEmail": "Invalid email address",
@@ -74,7 +84,8 @@
     "invalidChildrenCount": "Invalid children count",
     "incompleteChildData": "Please fill in all data for each child",
     "serverError": "Server error occurred",
-    "networkError": "Network error occurred"
+    "networkError": "Network error occurred",
+    "invalidCaptcha": "Bot check failed. Please try again."
   },
   "admin": {
     "login": {

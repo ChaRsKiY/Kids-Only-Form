@@ -64,17 +64,6 @@ export const POST = async (req: NextRequest) => {
     const validatedData = result.data;
 
     try {
-      let phoneNumber: number | null = null;
-      if (validatedData.phone) {
-        const cleanPhone = validatedData.phone.replace(/[^0-9]/g, '');
-        phoneNumber = parseInt(cleanPhone);
-        if (isNaN(phoneNumber)) {
-          return NextResponse.json({ 
-            error: "Invalid phone number format",
-            details: { phone: "errors.invalidPhone" }
-          }, { status: 400 });
-        }
-      }
 
       // Postal code validation only if provided
       let postalCode: number | null = null;
@@ -88,7 +77,6 @@ export const POST = async (req: NextRequest) => {
         }
         postalCode = parsed;
       }
-
       // Resolve branch: explicit code or kiosk cookie -> fallback
       let branch = null as null | { id: string; isActive: boolean };
       if (validatedData.branchCode) {
@@ -121,6 +109,7 @@ export const POST = async (req: NextRequest) => {
         }, { status: 400 });
       }
 
+
       if (validatedData.children) {
         for (let i = 0; i < validatedData.children.length; i++) {
           const childDob = new Date(validatedData.children[i].dob);
@@ -139,7 +128,7 @@ export const POST = async (req: NextRequest) => {
           lastName: validatedData.lastName,
           email: validatedData.email,
           dob: parentDob,
-          phone: phoneNumber,
+          phone: (validatedData.phone ?? null) as any,
           street: validatedData.street || '',
           postalCode: postalCode ?? 0,
           city: validatedData.city || '',
@@ -187,18 +176,25 @@ export const POST = async (req: NextRequest) => {
             });
 
             if (response.ok) {
-              const result = await response.json();
-              console.log(`[SUBSCRIPTION] Automation ${automation.name} processed:`, result.message);
+              if (process.env.NODE_ENV !== 'production') {
+                const result = await response.json();
+                console.log(`[SUBSCRIPTION] Automation ${automation.name} processed:`, result.message);
+              }
             } else {
-              console.error(`[SUBSCRIPTION] Failed to process automation ${automation.name}:`, response.status);
-              console.log(response);
+              if (process.env.NODE_ENV !== 'production') {
+                console.error(`[SUBSCRIPTION] Failed to process automation ${automation.name}:`, response.status);
+              }
             }
           } catch (automationError) {
-            console.error(`[SUBSCRIPTION] Error processing automation ${automation.name}:`, automationError);
+            if (process.env.NODE_ENV !== 'production') {
+              console.error(`[SUBSCRIPTION] Error processing automation ${automation.name}:`, automationError);
+            }
           }
         }
       } catch (automationError) {
-        console.error('[SUBSCRIPTION] Error fetching automations:', automationError);
+        if (process.env.NODE_ENV !== 'production') {
+          console.error('[SUBSCRIPTION] Error fetching automations:', automationError);
+        }
         // Don't fail the subscription creation if automation processing fails
       }
 
@@ -208,7 +204,9 @@ export const POST = async (req: NextRequest) => {
       });
 
     } catch (dbError) {
-      console.error('Database error:', dbError);
+      if (process.env.NODE_ENV !== 'production') {
+        console.error('Database error:', dbError);
+      }
       return NextResponse.json({ 
         error: "Database operation failed",
         details: "Unable to save subscription to database"
@@ -216,7 +214,9 @@ export const POST = async (req: NextRequest) => {
     }
 
   } catch (parseError) {
-    console.error('JSON parse error:', parseError);
+    if (process.env.NODE_ENV !== 'production') {
+      console.error('JSON parse error:', parseError);
+    }
     return NextResponse.json({ 
       error: "Invalid JSON",
       details: "Request body must be valid JSON"

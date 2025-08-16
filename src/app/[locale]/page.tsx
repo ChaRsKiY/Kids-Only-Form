@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useLayoutEffect, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
+import { useJsApiLoader } from '@react-google-maps/api';
 import type SignatureCanvasType from 'react-signature-canvas';
 import { useTranslations, useLocale } from 'next-intl';
 import { MdOutlineDelete } from 'react-icons/md';
@@ -20,7 +21,6 @@ const SignatureCanvas = dynamic(async () => {
     <Component ref={ref as any} {...props} />
   ));
 }, { ssr: false });
-const LoadScript = dynamic<any>(() => import('@react-google-maps/api').then(m => m.LoadScript), { ssr: false });
 const StandaloneSearchBox = dynamic<any>(() => import('@react-google-maps/api').then(m => m.StandaloneSearchBox), { ssr: false });
 
 
@@ -83,6 +83,7 @@ export default function HomePage() {
   const [isMapsReady, setIsMapsReady] = useState(false);
   const [showIdleModal, setShowIdleModal] = useState(false);
   const [idleCountdown, setIdleCountdown] = useState(20);
+  const [mapsError, setMapsError] = useState<string | null>(null);
   const [branches, setBranches] = useState<Branch[]>([]);
   const [isLoadingBranches, setIsLoadingBranches] = useState(true);
   const [modalStatus, setModalStatus] = useState<'loading' | 'success' | 'error'>('loading');
@@ -90,6 +91,7 @@ export default function HomePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showBranchModal, setShowBranchModal] = useState(false);
   const [selectedBranchForPair, setSelectedBranchForPair] = useState<string>('');
+  const [cfToken, setCfToken] = useState<string>('');
   const pendingSignatureRef = useRef<string>('');
   const idleTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const modalTimeoutRef = useRef<NodeJS.Timeout | null>(null);
@@ -284,23 +286,46 @@ export default function HomePage() {
       const response = await fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, signature: effectiveSignature }),
+        body: JSON.stringify({ ...form, signature: effectiveSignature, cfTurnstileToken: cfToken || undefined }),
       });
       const data = await response.json();
       if (!response.ok) {
-        setModalStatus('error');
-        if (data.details && typeof data.details === 'object') {
-          const errorMessages = Object.values(data.details).join(', ');
-          setModalError(t(errorMessages as string));
-        } else {
-          setModalError(t('errors.serverError') || 'Server error occurred');
+        if (response.status === 400 && data.details && typeof data.details === 'object') {
+          const newErrors: ErrorsType = {};
+          Object.entries<string>(data.details).forEach(([path, messageKey]) => {
+            if (path.startsWith('children.')) {
+              const [, idxStr, field] = path.split('.');
+              const idx = Number(idxStr);
+              if (!Number.isNaN(idx)) {
+                if (!Array.isArray(newErrors.children)) newErrors.children = [];
+                while (newErrors.children.length <= idx) newErrors.children.push({});
+                (newErrors.children[idx] as any)[field as any] = messageKey;
+              }
+            } else {
+              (newErrors as any)[path] = t(messageKey);
+            }
+          });
+          setErrors(newErrors);
+          setIsModalOpen(false);
+          setModalStatus('loading');
+          setModalError('');
+          const firstErrorKey = Object.keys(data.details)[0];
+          if (firstErrorKey) {
+            const el = document.querySelector<HTMLInputElement | HTMLSelectElement>(`[name="${firstErrorKey}"]`);
+            el?.focus();
+          }
+          return;
         }
+        setModalStatus('error');
+        setModalError(t('errors.serverError') || 'Server error occurred');
       } else {
         setModalStatus('success');
         handleFormReset();
       }
     } catch (error) {
-      console.error('Network error:', error);
+      if (process.env.NODE_ENV !== 'production') {
+        console.error('Network error:', error);
+      }
       setModalStatus('error');
       setModalError(t('errors.networkError') || 'Network error occurred');
     }
@@ -484,10 +509,14 @@ export default function HomePage() {
         const data = await response.json();
         setBranches(data);
       } else {
-        console.error('Failed to load branches');
+        if (process.env.NODE_ENV !== 'production') {
+          console.error('Failed to load branches');
+        }
       }
     } catch (error) {
-      console.error('Error loading branches:', error);
+      if (process.env.NODE_ENV !== 'production') {
+        console.error('Error loading branches:', error);
+      }
     } finally {
       setIsLoadingBranches(false);
     }
@@ -495,6 +524,30 @@ export default function HomePage() {
 
   useEffect(() => {
     loadBranches();
+  }, []);
+
+  // Google Maps loader with StrictMode compatibility
+  const { isLoaded, loadError } = useJsApiLoader({
+    id: 'google-maps-script',
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY || '',
+    libraries: ['places'],
+  });
+  useEffect(() => {
+    if (isLoaded) setIsMapsReady(true);
+    if (loadError) setMapsError('maps.failed');
+  }, [isLoaded, loadError]);
+
+  useEffect(() => {
+    if (!process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY) return;
+    const scriptId = 'turnstile-script';
+    if (document.getElementById(scriptId)) return;
+    const s = document.createElement('script');
+    s.id = scriptId;
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+    s.async = true;
+    s.defer = true;
+    document.body.appendChild(s);
+    (window as any).onTurnstileSuccess = (token: string) => setCfToken(token);
   }, []);
 
   return (
@@ -598,6 +651,7 @@ export default function HomePage() {
                       <div>
                         <Input
                           name={`child-firstName-${idx}`}
+                          id={`child-firstName-${idx}`}
                           value={child.firstName}
                           onChange={e => handleChildChange(idx, 'firstName', e.target.value)}
                           placeholder={t('form.childFirstName')}
@@ -608,6 +662,7 @@ export default function HomePage() {
                       <div>
                         <Input
                           name={`child-lastName-${idx}`}
+                          id={`child-lastName-${idx}`}
                           value={child.lastName}
                           onChange={e => handleChildChange(idx, 'lastName', e.target.value)}
                           placeholder={t('form.childLastName')}
@@ -618,6 +673,7 @@ export default function HomePage() {
                       <div>
                         <Select
                           name={`child-gender-${idx}`}
+                          id={`child-gender-${idx}`}
                           value={child.gender}
                           onChange={(e) => handleChildChange(idx, 'gender', e.target.value as Gender)}
                           options={[
@@ -711,6 +767,7 @@ export default function HomePage() {
                         }}
                       >
                         <Input 
+                          id="street"
                           name="street" 
                           value={form.street} 
                           onChange={handleChange} 
@@ -720,28 +777,28 @@ export default function HomePage() {
                         />
                       </StandaloneSearchBox>
                     ) : (
-                      <Input name="street" value={form.street} onChange={handleChange} placeholder={t('form.street')} inputSize='lg' />
+                      <Input id="street" name="street" value={form.street} onChange={handleChange} placeholder={t('form.street')} inputSize='lg' />
                     )}
                     {errors.street && <div className="text-red-500 text-xs mt-1">{errors.street}</div>}
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
                   <div>
-                    <Input name="postalCode" value={form.postalCode} onChange={handleChange} placeholder={t('form.postalCode')} inputSize='lg' />
+                    <Input id="postalCode" name="postalCode" value={form.postalCode} onChange={handleChange} placeholder={t('form.postalCode')} inputSize='lg' />
                     {errors.postalCode && <div className="text-red-500 text-xs mt-1">{errors.postalCode}</div>}
                   </div>
                   <div>
-                    <Input name="city" value={form.city} onChange={handleChange} placeholder={t('form.city')} inputSize='lg' />
+                    <Input id="city" name="city" value={form.city} onChange={handleChange} placeholder={t('form.city')} inputSize='lg' />
                     {errors.city && <div className="text-red-500 text-xs mt-1">{errors.city}</div>}
                   </div>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Input name="province" value={form.province} onChange={handleChange} placeholder={t('form.province')} inputSize='lg' />
+                    <Input id="province" name="province" value={form.province} onChange={handleChange} placeholder={t('form.province')} inputSize='lg' />
                     {errors.province && <div className="text-red-500 text-xs mt-1">{errors.province}</div>}
                   </div>
                   <div>
-                    <Input name="country" value={form.country} onChange={handleChange} placeholder={t('form.country')} inputSize='lg' />
+                    <Input id="country" name="country" value={form.country} onChange={handleChange} placeholder={t('form.country')} inputSize='lg' />
                     {errors.country && <div className="text-red-500 text-xs mt-1">{errors.country}</div>}
                   </div>
                 </div>
@@ -828,6 +885,18 @@ export default function HomePage() {
             {errors.signature && <div className="text-red-500 text-xs mt-1">{errors.signature}</div>}
           </div>
 
+          {/* Turnstile */}
+          {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && (
+            <div className="my-4 flex justify-center">
+              <div
+                className="cf-turnstile"
+                data-sitekey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+                data-callback="onTurnstileSuccess"
+                data-size="normal"
+              />
+            </div>
+          )}
+
           {/* Subscribe Button */}
           <Button type="submit" className="w-full" size='lg'>{t('form.subscribe')}</Button>
         </form>
@@ -842,12 +911,13 @@ export default function HomePage() {
           </Button>
         )}
 
-        <LoadScript
-          id="google-maps-script"
-          googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY!}
-          libraries={["places"]}
-          onLoad={() => setIsMapsReady(true)}
-        />
+        {/* Google Maps is loaded via useJsApiLoader hook */}
+        {mapsError && hasAddress && (
+          <div className="mt-4 rounded-md border border-yellow-300 bg-yellow-50 p-3 text-sm text-yellow-900">
+            <strong>{t('maps.errorTitle')}</strong>
+            <div>{t('maps.errorDescription')}</div>
+          </div>
+        )}
         {showIdleModal && (
           <div
             className="fixed inset-0 z-[100] flex items-center justify-center bg-black/10 backdrop-blur-sm"
@@ -855,8 +925,8 @@ export default function HomePage() {
             style={{ cursor: 'pointer' }}
           >
             <div className="bg-white rounded-xl shadow-xl p-10 max-w-lg w-full text-center select-none">
-              <div className="text-2xl font-bold mb-4">Still with us?</div>
-              <div className="mb-4">We noticed you’ve stepped away. To keep your info safe,<br/>we’ll clear the form in 20 seconds.<br/><br/>Tap anywhere to keep going!</div>
+              <div className="text-2xl font-bold mb-4">{t('idle.title')}</div>
+              <div className="mb-4">{t('idle.description', { seconds: idleCountdown })}</div>
               <div className="text-3xl font-bold">{idleCountdown}</div>
             </div>
           </div>
@@ -889,10 +959,12 @@ export default function HomePage() {
                 <Button
                   onClick={async () => {
                     if (!selectedBranchForPair) return;
-                    // Ставим куку на клиенте, чтобы следующий запрос отправился с ней
-                    const maxAge = 60 * 60 * 24 * 365 * 100; // ~100 лет
-                    const secure = window.location.protocol === 'https:' ? '; Secure' : '';
-                    document.cookie = `kiosk-branch=${encodeURIComponent(selectedBranchForPair)}; Path=/; Max-Age=${maxAge}; SameSite=Lax${secure}`;
+                    if (process.env.NODE_ENV !== 'production') {
+                      // В дев-режиме разрешим клиентский сет, но предпочтительно использовать /api/kiosk/pair
+                      const maxAge = 60 * 60 * 24 * 365 * 100;
+                      const secure = window.location.protocol === 'https:' ? '; Secure' : '';
+                      document.cookie = `kiosk-branch=${encodeURIComponent(selectedBranchForPair)}; Path=/; Max-Age=${maxAge}; SameSite=Lax${secure}`;
+                    }
                     setShowBranchModal(false);
                     await submitForm(pendingSignatureRef.current || form.signature);
                   }}

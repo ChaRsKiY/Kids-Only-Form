@@ -37,7 +37,7 @@ model Subscription {
   lastName  String
   email     String
   dob       DateTime
-  phone     Int?
+  phone     String?
   street    String
   postalCode Int
   city       String

@@ -60,6 +60,16 @@
     "tryAgain": "Bitte versuchen Sie es erneut oder kontaktieren Sie uns.",
     "close": "Schließen"
   },
+  "idle": {
+    "title": "Sind Sie noch da?",
+    "description": "Wir haben bemerkt, dass Sie abwesend sind. Zum Schutz Ihrer Daten wird das Formular in {seconds} Sekunden geleert. Tippen Sie irgendwo, um fortzufahren!",
+    "tapAnywhere": "Tippen Sie irgendwo, um fortzufahren!",
+    "seconds": "Sek."
+  },
+  "maps": {
+    "errorTitle": "Google Maps konnte nicht geladen werden",
+    "errorDescription": "API‑Schlüssel fehlt oder Zugriff ist blockiert. Sie können die Adresse manuell eingeben."
+  },
   "errors": {
     "required": "Dieses Feld ist erforderlich",
     "invalidEmail": "Ungültige E-Mail-Adresse",
@@ -74,7 +84,8 @@
     "invalidChildrenCount": "Ungültige Anzahl von Kindern",
     "incompleteChildData": "Bitte füllen Sie alle Daten für jedes Kind aus",
     "serverError": "Serverfehler aufgetreten",
-    "networkError": "Netzwerkfehler aufgetreten"
+    "networkError": "Netzwerkfehler aufgetreten",
+    "invalidCaptcha": "Bot‑Prüfung fehlgeschlagen. Bitte erneut versuchen."
   },
   "admin": {
     "login": {

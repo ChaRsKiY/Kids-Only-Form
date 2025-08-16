@@ -56,7 +56,10 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
     return (
       <div className="w-full">
         {label && (
-          <label className="block text-sm font-medium text-muted-foreground mb-2">
+          <label
+            className="block text-sm font-medium text-muted-foreground mb-2"
+            htmlFor={(props as any).id}
+          >
             {label}
           </label>
         )}
@@ -72,6 +75,8 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
             className={baseClasses}
             ref={ref}
             disabled={disabled}
+            aria-invalid={!!error}
+            aria-describedby={error ? `${(props as any).id}-error` : undefined}
             {...props}
           >
             {options.map((option) => (
@@ -104,7 +109,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
         {(error || helperText) && (
           <div className="mt-1">
             {error && (
-              <p className="text-sm text-destructive">{error}</p>
+              <p id={`${(props as any).id}-error`} className="text-sm text-destructive">{error}</p>
             )}
             {helperText && !error && (
               <p className="text-sm text-muted-foreground">{helperText}</p>
