@@ -45,6 +45,7 @@ model Subscription {
   country    String
   agree      Boolean
   signature  String
+  cancellationKey String
   branchId  String   @db.ObjectId
   branch    Branch   @relation(fields: [branchId], references: [id])
   children   Child[]

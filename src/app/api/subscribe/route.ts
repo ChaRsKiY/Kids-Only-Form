@@ -145,6 +145,7 @@ export const POST = async (req: NextRequest) => {
               dob: new Date(child.dob),
             })),
           },
+          cancellationKey: crypto.randomUUID(),
         }
       });
 
