@@ -161,36 +161,38 @@ export const POST = async (req: NextRequest) => {
           }
         });
 
+        // Process automations asynchronously without waiting for results
         for (const automation of automations) {
-          try {
-            // Call automation processing endpoint
-            const response = await fetch(`${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/admin/email/automations/process`, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                trigger: 'subscription',
-                subscriptionId: subscription.id,
-                automationId: automation.id
-              })
-            });
-
+          // Fire and forget - don't await the result
+          fetch(`${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/admin/email/automations/process`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              trigger: 'subscription',
+              subscriptionId: subscription.id,
+              automationId: automation.id
+            })
+          })
+          .then(response => {
             if (response.ok) {
               if (process.env.NODE_ENV !== 'production') {
-                const result = await response.json();
-                console.log(`[SUBSCRIPTION] Automation ${automation.name} processed:`, result.message);
+                return response.json().then(result => {
+                  console.log(`[SUBSCRIPTION] Automation ${automation.name} processed:`, result.message);
+                });
               }
             } else {
               if (process.env.NODE_ENV !== 'production') {
                 console.error(`[SUBSCRIPTION] Failed to process automation ${automation.name}:`, response.status);
               }
             }
-          } catch (automationError) {
+          })
+          .catch(automationError => {
             if (process.env.NODE_ENV !== 'production') {
               console.error(`[SUBSCRIPTION] Error processing automation ${automation.name}:`, automationError);
             }
-          }
+          });
         }
       } catch (automationError) {
         if (process.env.NODE_ENV !== 'production') {
