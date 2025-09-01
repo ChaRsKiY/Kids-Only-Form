@@ -163,7 +163,6 @@ export const POST = async (req: NextRequest) => {
 
         // Process automations asynchronously without waiting for results
         for (const automation of automations) {
-          // Fire and forget - don't await the result
           fetch(`${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/admin/email/automations/process`, {
             method: 'POST',
             headers: {
