@@ -161,8 +161,8 @@ export const POST = async (req: NextRequest) => {
           }
         });
 
-        // Process automations asynchronously without waiting for results
-        for (const automation of automations) {
+        // Process automations asynchronously - wait for all to complete but don't block response
+        const automationPromises = automations.map(automation => 
           fetch(`${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/admin/email/automations/process`, {
             method: 'POST',
             headers: {
@@ -191,8 +191,15 @@ export const POST = async (req: NextRequest) => {
             if (process.env.NODE_ENV !== 'production') {
               console.error(`[SUBSCRIPTION] Error processing automation ${automation.name}:`, automationError);
             }
-          });
-        }
+          })
+        );
+
+        // Wait for all automations to complete but don't block the response
+        Promise.allSettled(automationPromises).then(results => {
+          if (process.env.NODE_ENV !== 'production') {
+            console.log(`[SUBSCRIPTION] All automations processed. Results:`, results.length);
+          }
+        });
       } catch (automationError) {
         if (process.env.NODE_ENV !== 'production') {
           console.error('[SUBSCRIPTION] Error fetching automations:', automationError);
