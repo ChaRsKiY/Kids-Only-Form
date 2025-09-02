@@ -162,8 +162,8 @@ export const POST = async (req: NextRequest) => {
         });
 
         // Process automations asynchronously - wait for all to complete but don't block response
-        const automationPromises = automations.map(automation => 
-          fetch(`${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/admin/email/automations/process`, {
+        const automationPromises = automations.map(async automation => {
+          const response = await fetch(`${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/admin/email/automations/process`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -174,28 +174,22 @@ export const POST = async (req: NextRequest) => {
               automationId: automation.id
             })
           })
-          .then(response => {
-            if (response.ok) {
-              if (process.env.NODE_ENV !== 'production') {
-                return response.json().then(result => {
-                  console.log(`[SUBSCRIPTION] Automation ${automation.name} processed:`, result.message);
-                });
-              }
-            } else {
-              if (process.env.NODE_ENV !== 'production') {
-                console.error(`[SUBSCRIPTION] Failed to process automation ${automation.name}:`, response.status);
-              }
-            }
-          })
-          .catch(automationError => {
+
+          const result = await response.json();
+        
+          if (response.ok) {
             if (process.env.NODE_ENV !== 'production') {
-              console.error(`[SUBSCRIPTION] Error processing automation ${automation.name}:`, automationError);
+              console.log(`[SUBSCRIPTION] Automation ${automation.name} processed:`, result.message);
             }
-          })
-        );
+          } else {
+            if (process.env.NODE_ENV !== 'production') {
+              console.error(`[SUBSCRIPTION] Failed to process automation ${automation.name}:`, response.status);
+            }
+          }
+        });
 
         // Wait for all automations to complete but don't block the response
-        Promise.allSettled(automationPromises).then(results => {
+        Promise.all(automationPromises).then(results => {
           if (process.env.NODE_ENV !== 'production') {
             console.log(`[SUBSCRIPTION] All automations processed. Results:`, results.length);
           }
