@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { db } from '@/lib/db';
 
 export async function GET(req: NextRequest) {
   try {
@@ -15,19 +14,13 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: 'Missing branch parameter' }, { status: 400 });
     }
 
-    const branch = await db.branch.findUnique({ where: { code: branchCode } });
-    if (!branch || !branch.isActive) {
-      return NextResponse.json({ error: 'Invalid or inactive branch' }, { status: 400 });
-    }
-
-    const res = NextResponse.json({ message: 'Kiosk paired', branch: { code: branch.code, name: branch.name } });
-    res.cookies.set('kiosk-branch', branch.code, {
+    const res = NextResponse.json({ message: 'Kiosk paired', branch: { code: branchCode } });
+    res.cookies.set('kiosk-branch', branchCode, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       path: '/',
-      // Без истечения срока: сессионная кука превращаем в "постоянную" через очень большой срок
-      maxAge: 60 * 60 * 24 * 365 * 100, // ~100 лет
+      maxAge: 60 * 60 * 24 * 365 * 100,
     });
     return res;
   } catch (e) {

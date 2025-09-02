@@ -66,8 +66,6 @@ const languages = [
   { code: 'sk', label: 'Slovenčina' },
 ];
 
-
-
 export default function HomePage() {
   const t = useTranslations();
   const locale = useLocale();
@@ -84,15 +82,10 @@ export default function HomePage() {
   const [showIdleModal, setShowIdleModal] = useState(false);
   const [idleCountdown, setIdleCountdown] = useState(20);
   const [mapsError, setMapsError] = useState<string | null>(null);
-  const [branches, setBranches] = useState<Branch[]>([]);
-  const [isLoadingBranches, setIsLoadingBranches] = useState(true);
   const [modalStatus, setModalStatus] = useState<'loading' | 'success' | 'error'>('loading');
   const [modalError, setModalError] = useState<string>('');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [showBranchModal, setShowBranchModal] = useState(false);
-  const [selectedBranchForPair, setSelectedBranchForPair] = useState<string>('');
   const [cfToken, setCfToken] = useState<string>('');
-  const pendingSignatureRef = useRef<string>('');
   const idleTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const modalTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const lastActivityRef = useRef<number>(Date.now());
@@ -115,6 +108,7 @@ export default function HomePage() {
     setErrors({});
     setIsEmpty(true);
     setHasAddress(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     if (sigCanvasRef.current) {
       sigCanvasRef.current.clear();
     }
@@ -157,7 +151,6 @@ export default function HomePage() {
 
   const handleBegin = () => {
     setIsEmpty(false);
-    // Снимаем ошибку подписи при начале рисования
     setErrors(prev => {
       const ne = { ...prev } as ErrorsType & Record<string, string>;
       delete (ne as any).signature;
@@ -214,16 +207,13 @@ export default function HomePage() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // Собираем все ошибки сразу
     const allErrors: Record<string, any> = {};
 
-    // Проверка подписи
     const effectiveSignature = form.signature && form.signature.trim() !== '' ? form.signature : '';
     if (!effectiveSignature || effectiveSignature.trim() === '') {
       allErrors.signature = t('errors.signatureRequired');
     }
     
-    // Проверка основных полей
     const requiredFields = ['firstName', 'lastName', 'email', 'dob'];
     for (const field of requiredFields) {
       if (!form[field as keyof FormType] || String(form[field as keyof FormType]).trim() === '') {
@@ -231,12 +221,10 @@ export default function HomePage() {
       }
     }
     
-    // Проверка согласия
     if (!form.agree) {
       allErrors.agree = t('errors.checkboxRequired');
     }
 
-    // Проверка детей
     const hasIncompleteChildren = form.children.some(child => 
       !child.firstName.trim() || !child.lastName.trim() || !child.dob
     );
@@ -244,7 +232,6 @@ export default function HomePage() {
       allErrors.children = [{ firstName: 'errors.incompleteChildData' }];
     }
 
-    // Проверка адреса только если он добавлен
     if (hasAddress) {
       const addressFields: (keyof FormType)[] = ['street', 'postalCode', 'city', 'province', 'country'];
       addressFields.forEach((f) => {
@@ -262,24 +249,10 @@ export default function HomePage() {
     
     setErrors({});
 
-    try {
-      const check = await fetch('/api/kiosk/check', { cache: 'no-store' });
-      const json = await check.json();
-      if (!json.kioskBranchCookie) {
-        pendingSignatureRef.current = effectiveSignature;
-        if (!selectedBranchForPair && branches.length > 0) {
-          setSelectedBranchForPair(branches[0].code);
-        }
-        setShowBranchModal(true);
-        return;
-      }
-    } catch {}
-
     await submitForm(effectiveSignature);
   };
 
   const submitForm = async (effectiveSignature: string) => {
-    // Открываем модалку загрузки
     setModalStatus('loading');
     setIsModalOpen(true);
     try {
@@ -331,9 +304,7 @@ export default function HomePage() {
     }
   };
 
-  // Date change from custom DateInput (value is YYYY-MM-DD or empty)
   const handleDobChange = (value: string) => {
-    // forbid future dates
     const todayISO = new Date().toISOString().slice(0,10);
     if (value && value > todayISO) return;
     setForm(f => ({ ...f, dob: value }));
@@ -345,7 +316,6 @@ export default function HomePage() {
     });
   };
 
-  // --- Children handlers ---
   const handleChildChange = (idx: number, field: keyof Child, value: string) => {
     setForm(f => {
       const children = [...f.children];
@@ -371,7 +341,7 @@ export default function HomePage() {
   };
 
   const handleAddChild = () => {  
-    if (form.children.length < 5) {
+    if (form.children.length < 3) {
       setForm(f => ({ ...f, children: [...f.children, { firstName: '', lastName: '', gender: 'male', dob: '' }] }));
       setErrors(prev => {
         const newErrors: ErrorsType = { ...prev };
@@ -424,7 +394,6 @@ export default function HomePage() {
     }
   }, [selectedPlace]);
 
-  // react-datepicker locales removed; using custom DateInput
 
   const resetIdleTimers = useCallback(() => {
     if (idleTimeoutRef.current) clearTimeout(idleTimeoutRef.current);
@@ -500,31 +469,6 @@ export default function HomePage() {
     setModalStatus('loading');
     setModalError('');
   };
-
-  const loadBranches = async () => {
-    try {
-      setIsLoadingBranches(true);
-      const response = await fetch('/api/branches');
-      if (response.ok) {
-        const data = await response.json();
-        setBranches(data);
-      } else {
-        if (process.env.NODE_ENV !== 'production') {
-          console.error('Failed to load branches');
-        }
-      }
-    } catch (error) {
-      if (process.env.NODE_ENV !== 'production') {
-        console.error('Error loading branches:', error);
-      }
-    } finally {
-      setIsLoadingBranches(false);
-    }
-  };
-
-  useEffect(() => {
-    loadBranches();
-  }, []);
 
   // Google Maps loader with StrictMode compatibility
   const { isLoaded, loadError } = useJsApiLoader({
@@ -702,7 +646,7 @@ export default function HomePage() {
                     </div>
                   </div>
                 ))}
-                {form.children.length < 5 && (
+                {form.children.length < 3 && (
                   <Button 
                     type="button" 
                     onClick={handleAddChild}
@@ -939,42 +883,6 @@ export default function HomePage() {
           status={modalStatus}
           errorMessage={modalError}
         />
-
-        {/* Branch Select Modal (no kiosk cookie) */}
-        {showBranchModal && (
-          <div className="fixed inset-0 z-[110] flex items-center justify-center bg-black/40" onClick={() => setShowBranchModal(false)}>
-            <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
-              <h3 className="text-lg font-semibold mb-4">{t('form.selectBranch') || 'Select branch'}</h3>
-              <div className="mb-4">
-                <Select
-                  name="kiosk-branch"
-                  value={selectedBranchForPair}
-                  onChange={(e) => setSelectedBranchForPair((e as React.ChangeEvent<HTMLSelectElement>).target.value)}
-                  options={branches.map(b => ({ label: `${b.name} (${b.code})`, value: b.code }))}
-                  inputSize='lg'
-                />
-              </div>
-              <div className="flex gap-2 justify-end">
-                <Button variant="ghost" onClick={() => setShowBranchModal(false)}>{t('modal.close') || 'Close'}</Button>
-                <Button
-                  onClick={async () => {
-                    if (!selectedBranchForPair) return;
-                    if (process.env.NODE_ENV !== 'production') {
-                      // В дев-режиме разрешим клиентский сет, но предпочтительно использовать /api/kiosk/pair
-                      const maxAge = 60 * 60 * 24 * 365 * 100;
-                      const secure = window.location.protocol === 'https:' ? '; Secure' : '';
-                      document.cookie = `kiosk-branch=${encodeURIComponent(selectedBranchForPair)}; Path=/; Max-Age=${maxAge}; SameSite=Lax${secure}`;
-                    }
-                    setShowBranchModal(false);
-                    await submitForm(pendingSignatureRef.current || form.signature);
-                  }}
-                >
-                  OK
-                </Button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
   );
 }

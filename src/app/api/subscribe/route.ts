@@ -1,6 +1,6 @@
-import { db } from "@/lib/db";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { CreateContact, ContactsApi } from "@getbrevo/brevo";
 
 const serverFormSchema = z.object({
   firstName: z.string().min(1, { message: "errors.required" }).max(50, { message: "errors.tooLong" }),
@@ -77,30 +77,16 @@ export const POST = async (req: NextRequest) => {
         }
         postalCode = parsed;
       }
-      // Resolve branch: explicit code or kiosk cookie -> fallback
-      let branch = null as null | { id: string; isActive: boolean };
-      if (validatedData.branchCode) {
-        branch = await db.branch.findUnique({
-          where: { code: validatedData.branchCode.toUpperCase() }
-        });
-      }
-      if (!branch) {
-        const kioskCode = req.cookies.get('kiosk-branch')?.value;
-        if (kioskCode) {
-          branch = await db.branch.findUnique({ where: { code: kioskCode.toUpperCase() } });
-        }
-      }
-      if (!branch) {
-        branch = await db.branch.findFirst({ where: { isActive: true }, orderBy: { name: 'asc' } });
-      }
 
-      if (!branch || !branch.isActive) {
+      const branchCode = req.cookies.get('kiosk-branch')?.value;
+
+      if (!branchCode) {
         return NextResponse.json({ 
-          error: "Invalid or inactive branch",
-          details: { branchCode: "errors.invalidBranch" }
-        }, { status: 400 });
+          error: "Invalid branch code",
+          details: { postalCode: "errors.branchNotFound" }
+        }, { status: 404 });
       }
-
+      
       const parentDob = new Date(validatedData.dob);
       if (isNaN(parentDob.getTime())) {
         return NextResponse.json({ 
@@ -122,58 +108,48 @@ export const POST = async (req: NextRequest) => {
         }
       }
 
-      const subscription = await db.subscription.create({
-        data: {
-          firstName: validatedData.firstName,
-          lastName: validatedData.lastName,
-          email: validatedData.email,
-          dob: parentDob,
-          phone: (validatedData.phone ?? null) as any,
-          street: validatedData.street || '',
-          postalCode: postalCode ?? 0,
-          city: validatedData.city || '',
-          province: validatedData.province || '',
-          country: validatedData.country || '',
-          branchId: branch.id,
-          agree: validatedData.agree,
-          signature: validatedData.signature,
-          children: {
-            create: validatedData.children?.map((child) => ({
-              firstName: child.firstName,
-              lastName: child.lastName,
-              gender: child.gender,
-              dob: new Date(child.dob),
-            })),
-          },
-          cancellationKey: crypto.randomUUID(),
-        }
+      let contactAPI = new ContactsApi();
+      // @ts-ignore
+      contactAPI.authentications.apiKey.apiKey = process.env.BREVO_API || ""
+
+      let contact = new CreateContact();
+      contact.email = validatedData.email;
+      const firstChild = validatedData.children?.[0];
+      const secondChild = validatedData.children?.[1];
+      const thirdChild = validatedData.children?.[2];
+      contact.attributes = {
+        FIRSTNAME: validatedData.firstName,
+        LASTNAME: validatedData.lastName,
+        POSTCODE: validatedData.postalCode,
+        SIGNATURE: validatedData.signature,
+        STREET: validatedData.street || "",
+        CITY: validatedData.city || "",
+        COUNTRY: validatedData.country || "",
+        PROVINCE: validatedData.province || "",
+        PHONENUMBER: validatedData.phone || "",
+        DOB: validatedData.dob,
+        KID1_FIRSTNAME: firstChild?.firstName ?? "",
+        KID1_LASTNAME: firstChild?.lastName ?? "",
+        KID1_GENDER: firstChild?.gender ?? "",
+        KID1_DOB: firstChild?.dob ?? "",
+        KID2_FIRSTNAME: secondChild?.firstName ?? "",
+        KID2_LASTNAME: secondChild?.lastName ?? "",
+        KID2_GENDER: secondChild?.gender ?? "",
+        KID2_DOB: secondChild?.dob ?? "",
+        KID3_FIRSTNAME: thirdChild?.firstName ?? "",
+        KID3_LASTNAME: thirdChild?.lastName ?? "",
+        KID3_GENDER: thirdChild?.gender ?? "",
+        KID3_DOB: thirdChild?.dob ?? "",
+      };
+
+      const listId = branchCode?.toUpperCase() === "PD" ? 5 : 6;
+      contact.listIds = [listId];
+
+      contactAPI.createContact(contact).then(res => {
+        console.log(JSON.stringify(res.body));
+      }).catch(err => {
+        console.error("Error creating contact:", err.body);
       });
-
-      // Trigger subscription automations
-      try {
-        const automations = await db.emailAutomation.findMany({
-          where: {
-            trigger: 'subscription',
-            isActive: true
-          },
-          include: {
-            template: true
-          }
-        });
-
-        await db.delayedEmails.createMany({
-          data: automations.map(automation => ({
-            subscriptionId: subscription.id,
-            automationId: automation.id,
-            trigger: 'subscription',
-          })),
-        });
-      } catch (automationError) {
-        if (process.env.NODE_ENV !== 'production') {
-          console.error('[SUBSCRIPTION] Error fetching automations:', automationError);
-        }
-        // Don't fail the subscription creation if automation processing fails
-      }
 
       return NextResponse.json({ 
         message: "Subscription created successfully",
