@@ -50,7 +50,18 @@ model Subscription {
   branch    Branch   @relation(fields: [branchId], references: [id])
   children   Child[]
   emailLogs EmailLog[]
+  delayedEmails DelayedEmails[]
   createdAt  DateTime @default(now())
+}
+
+model DelayedEmails {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  subscriptionId String @db.ObjectId
+  subscription Subscription @relation(fields: [subscriptionId], references: [id])
+  automationId String @db.ObjectId
+  automation EmailAutomation @relation(fields: [automationId], references: [id])
+  trigger String
+  createdAt DateTime @default(now())
 }
 
 model Child {
@@ -125,4 +136,5 @@ model EmailAutomation {
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   emailLogs   EmailLog[]
+  delayedEmails DelayedEmails[]
 }

@@ -161,38 +161,12 @@ export const POST = async (req: NextRequest) => {
           }
         });
 
-        // Process automations asynchronously - wait for all to complete but don't block response
-        const automationPromises = automations.map(async automation => {
-          const response = await fetch(`${process.env.NEXTAUTH_URL || 'http://localhost:3000'}/api/admin/email/automations/process`, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              trigger: 'subscription',
-              subscriptionId: subscription.id,
-              automationId: automation.id
-            })
-          })
-
-          const result = await response.json();
-        
-          if (response.ok) {
-            if (process.env.NODE_ENV !== 'production') {
-              console.log(`[SUBSCRIPTION] Automation ${automation.name} processed:`, result.message);
-            }
-          } else {
-            if (process.env.NODE_ENV !== 'production') {
-              console.error(`[SUBSCRIPTION] Failed to process automation ${automation.name}:`, response.status);
-            }
-          }
-        });
-
-        // Wait for all automations to complete but don't block the response
-        await Promise.all(automationPromises).then(results => {
-          if (process.env.NODE_ENV !== 'production') {
-            console.log(`[SUBSCRIPTION] All automations processed. Results:`, results.length);
-          }
+        await db.delayedEmails.createMany({
+          data: automations.map(automation => ({
+            subscriptionId: subscription.id,
+            automationId: automation.id,
+            trigger: 'subscription',
+          })),
         });
       } catch (automationError) {
         if (process.env.NODE_ENV !== 'production') {
