@@ -145,11 +145,7 @@ export const POST = async (req: NextRequest) => {
       const listId = branchCode?.toUpperCase() === "PD" ? 5 : 6;
       contact.listIds = [listId];
 
-      contactAPI.createContact(contact).then(res => {
-        console.log(JSON.stringify(res.body));
-      }).catch(err => {
-        console.error("Error creating contact:", err.body);
-      });
+      await contactAPI.createContact(contact)
 
       return NextResponse.json({ 
         message: "Subscription created successfully",
