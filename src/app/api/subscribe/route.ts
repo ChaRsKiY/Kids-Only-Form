@@ -189,7 +189,7 @@ export const POST = async (req: NextRequest) => {
         });
 
         // Wait for all automations to complete but don't block the response
-        Promise.all(automationPromises).then(results => {
+        await Promise.all(automationPromises).then(results => {
           if (process.env.NODE_ENV !== 'production') {
             console.log(`[SUBSCRIPTION] All automations processed. Results:`, results.length);
           }
