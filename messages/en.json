@@ -1016,7 +1016,8 @@
     },
     "dataController": {
       "title": "Data Controller",
-      "description": "The data controller for the processing of your personal data is:"
+      "description": "The data controller for the processing of your personal data is:",
+      "afterDescription": "As the data controller, we determine the purposes and means of processing your personal data and are responsible for ensuring compliance with GDPR."
     },
     "informationWeCollect": {
       "title": "Information We Collect",
@@ -1043,29 +1044,35 @@
       "purpose2": "To send personalized email notifications (e.g., newsletters, offers)",
       "purpose3": "To communicate with you about service-related matters",
       "purpose4": "To comply with legal and regulatory obligations",
-      "purpose5": "To ensure the safety and integrity of our services"
+      "purpose5": "To ensure the safety and integrity of our services",
+      "purpose6": "To maintain accurate records and prevent fraud",
+      "afterDescription": "We will never use your personal information for purposes other than those explicitly stated in this policy without obtaining your consent."
     },
     "legalBasis": {
       "title": "Legal Basis for Processing",
       "description": "We process your data based on one or more of the following legal bases under Article 6 of the GDPR:",
-      "consent": "Your consent (Art. 6(1)(a) GDPR)",
+      "consent": "Consent (Art. 6(1)(a) GDPR)",
       "contract": "Contract performance (Art. 6(1)(b) GDPR)",
       "legal": "Legal obligations (Art. 6(1)(c) GDPR)",
-      "legitimate": "Legitimate interests (Art. 6(1)(f) GDPR), such as service optimization and fraud prevention"
+      "legitimate": "Legitimate interests (Art. 6(1)(f) GDPR), such as service optimization and fraud prevention",
+      "childrenNote": "For children's data, we process only with the explicit consent of a parent or legal guardian, in line with Article 8 GDPR."
     },
     "informationSharing": {
       "title": "Information Sharing",
-      "paragraph1": "We do NOT sell, rent, or share your personal information with third parties for advertising purposes.",
-      "paragraph2": "Your data may be shared with service providers who support our operations (e.g., email delivery providers, analytics tools), but only under strict data processing agreements (DPAs) in accordance with GDPR.",
-      "note": "Your information is used solely for providing Kids Only services and is never shared with third-party advertisers."
+      "paragraph1": "We do not sell, rent, or share your personal information with third parties for advertising purposes.",
+      "paragraph2": "Your data may be shared with service providers who support our operations, but only under strict Data Processing Agreements (DPAs) in accordance with GDPR.",
+      "brevoNote": "In particular, we use Brevo (Sendinblue GmbH) for managing email communications, newsletters, and marketing automation. Brevo processes data according to GDPR and provides tools to help you exercise your rights (access, rectification, erasure, portability, and objection).",
+      "partnersNote": "We carefully choose and monitor our partners to ensure they implement appropriate technical and organizational measures to protect personal data."
     },
     "internationalTransfers": {
       "title": "International Transfers",
-      "description": "If we transfer data outside the EU/EEA (e.g., to email marketing platforms like Mailchimp), such transfers are secured through Standard Contractual Clauses (SCCs) or other recognized safeguards."
+      "description": "Brevo stores and processes data primarily on servers within the EU (e.g., France, Germany). Transfers outside the EU/EEA, if necessary, are secured using Standard Contractual Clauses (SCCs) or other recognized safeguards.",
+      "controllerNote": "As the data controller, we remain responsible for choosing compliant providers and ensuring that any international data transfer complies with GDPR requirements."
     },
     "dataRetention": {
       "title": "Data Retention",
-      "description": "We retain personal data only as long as necessary to fulfill the purposes stated above or as required by law. After this period, data is securely deleted or anonymized."
+      "description": "We retain personal data only as long as necessary to fulfill the purposes stated above or as required by law. After this period, data is securely deleted or anonymized.",
+      "inactiveNote": "Inactive accounts, unsubscribed users, or data that is no longer needed for operational purposes will be deleted periodically to minimize the risk of data breaches."
     },
     "yourRights": {
       "title": "Your Rights Under GDPR",
@@ -1080,19 +1087,30 @@
       "right5": "Right to data portability",
       "right6": "Right to object to data processing",
       "right7": "Right to withdraw consent at any time",
-      "contact": "To exercise these rights, contact us at"
+      "contact": "To exercise these rights, contact us at",
+      "brevoRights": "Additionally, Brevo provides tools to help you exercise these rights in relation to data processed by their services."
     },
     "dataSecurity": {
       "title": "Data Security",
-      "description": "We implement technical and organizational security measures, including:",
+      "description": "We implement technical and organizational security measures to protect your personal data, including:",
       "measure1": "Encryption of data during transmission and storage",
       "measure2": "Firewalls and secure server infrastructure",
-      "measure3": "Regular security audits",
-      "measure4": "Access control policies and staff training"
+      "measure3": "Regular security audits and penetration testing",
+      "measure4": "Access control policies limiting data access to authorized personnel only",
+      "measure5": "Staff training on data protection and GDPR compliance",
+      "breachNote": "While we take all reasonable measures to protect data, no system is completely secure. In the unlikely event of a data breach, we will follow GDPR requirements for notification to authorities and affected individuals."
     },
     "cookies": {
       "title": "Cookies and Tracking",
-      "description": "We may use cookies or similar technologies in our app or website. You will be informed via cookie banner and can choose your preferences."
+      "description": "We may use cookies or similar technologies in our app or website. You will be informed via a cookie banner and can choose your preferences. Cookies help us improve user experience and measure service performance."
+    },
+    "responsibility": {
+      "title": "Responsibility and Liability",
+      "description": "As the data controller, we are responsible for ensuring lawful processing of personal data.",
+      "brevoProcessor": "Brevo acts as a data processor under our instructions. While Brevo implements GDPR-compliant security measures, we remain responsible for ensuring your data is collected, processed, and stored lawfully.",
+      "breachResponsibility": "Responsibility for any data breach is shared depending on the circumstances:",
+      "ourLiability": "If the breach results from our actions or negligence (e.g., unprotected forms, improper handling of data), we are liable.",
+      "brevoLiability": "If the breach results from Brevo's technical failure, Brevo is primarily liable, but we are required to respond appropriately under GDPR."
     },
     "contact": {
       "title": "Contact and Complaints",

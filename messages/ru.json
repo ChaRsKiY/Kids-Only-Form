@@ -1000,109 +1000,127 @@
     "cannotActivateWithoutTemplate": "Cannot activate automation without a template"
   },
   "privacy": {
-    "back": "Back",
-    "title": "Privacy Policy",
-    "lastUpdated": "Last Updated",
-    "lastUpdatedDate": "January 1, 2024",
+    "back": "Назад",
+    "title": "Политика конфиденциальности",
+    "lastUpdated": "Последнее обновление",
+    "lastUpdatedDate": "1 января 2024",
     "introduction": {
-      "title": "Introduction",
-      "paragraph1": "Kids Only (\"we\", \"our\", or \"us\") values your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, store, and protect the information you provide when using our services, in accordance with the General Data Protection Regulation (GDPR).",
-      "paragraph2": "By using our services, you agree to the practices described in this Privacy Policy."
+      "title": "Введение",
+      "paragraph1": "Kids Only («мы», «наш» или «нас») ценит вашу конфиденциальность и стремится защищать вашу личную информацию. Эта Политика конфиденциальности объясняет, как мы собираем, используем, храним и защищаем информацию, которую вы предоставляете при использовании наших услуг, в соответствии с Общим регламентом по защите данных (GDPR).",
+      "paragraph2": "Используя наши услуги, вы соглашаетесь с практиками, описанными в этой Политике конфиденциальности."
     },
     "dataController": {
-      "title": "Data Controller",
-      "description": "The data controller for the processing of your personal data is:"
+      "title": "Контроллер данных",
+      "description": "Контроллером данных для обработки ваших персональных данных является:",
+      "afterDescription": "Как контроллер данных, мы определяем цели и средства обработки ваших персональных данных и несем ответственность за обеспечение соответствия GDPR."
     },
     "informationWeCollect": {
-      "title": "Information We Collect",
+      "title": "Информация, которую мы собираем",
       "personal": {
-        "title": "Personal Information",
-        "name": "First and last name",
-        "email": "Email address",
-        "phone": "Phone number",
-        "address": "Residential address",
-        "dob": "Date of birth"
+        "title": "Личная информация",
+        "name": "Имя и фамилия",
+        "email": "Адрес электронной почты",
+        "phone": "Номер телефона",
+        "address": "Домашний адрес",
+        "dob": "Дата рождения"
       },
       "children": {
-        "title": "Children's Information",
-        "name": "Children's names",
-        "gender": "Children's gender",
-        "dob": "Children's dates of birth",
-        "note": "We only collect children's data with the explicit consent of the parent or legal guardian."
+        "title": "Информация о детях",
+        "name": "Имена детей",
+        "gender": "Пол детей",
+        "dob": "Даты рождения детей",
+        "note": "Мы собираем данные о детях только с явного согласия родителя или законного опекуна."
       }
     },
     "howWeUse": {
-      "title": "How We Use Your Information",
-      "description": "We use your information for the following purposes:",
-      "purpose1": "To provide and improve our services",
-      "purpose2": "To send personalized email notifications (e.g., newsletters, offers)",
-      "purpose3": "To communicate with you about service-related matters",
-      "purpose4": "To comply with legal and regulatory obligations",
-      "purpose5": "To ensure the safety and integrity of our services"
+      "title": "Как мы используем вашу информацию",
+      "description": "Мы используем вашу информацию для следующих целей:",
+      "purpose1": "Для предоставления и улучшения наших услуг",
+      "purpose2": "Для отправки персонализированных уведомлений по электронной почте (например, новостных рассылок, предложений)",
+      "purpose3": "Для общения с вами по вопросам, связанным с услугами",
+      "purpose4": "Для соблюдения правовых и нормативных обязательств",
+      "purpose5": "Для обеспечения безопасности и целостности наших услуг",
+      "purpose6": "Для ведения точных записей и предотвращения мошенничества",
+      "afterDescription": "Мы никогда не будем использовать вашу личную информацию для целей, отличных от явно указанных в этой политике, без получения вашего согласия."
     },
     "legalBasis": {
-      "title": "Legal Basis for Processing",
-      "description": "We process your data based on one or more of the following legal bases under Article 6 of the GDPR:",
-      "consent": "Your consent (Art. 6(1)(a) GDPR)",
-      "contract": "Contract performance (Art. 6(1)(b) GDPR)",
-      "legal": "Legal obligations (Art. 6(1)(c) GDPR)",
-      "legitimate": "Legitimate interests (Art. 6(1)(f) GDPR), such as service optimization and fraud prevention"
+      "title": "Правовая основа для обработки",
+      "description": "Мы обрабатываем ваши данные на основе одной или нескольких следующих правовых основ в соответствии со статьей 6 GDPR:",
+      "consent": "Согласие (ст. 6(1)(а) GDPR)",
+      "contract": "Исполнение договора (ст. 6(1)(b) GDPR)",
+      "legal": "Правовые обязательства (ст. 6(1)(c) GDPR)",
+      "legitimate": "Законные интересы (ст. 6(1)(f) GDPR), такие как оптимизация услуг и предотвращение мошенничества",
+      "childrenNote": "Для данных детей мы обрабатываем только с явного согласия родителя или законного опекуна, в соответствии со статьей 8 GDPR."
     },
     "informationSharing": {
-      "title": "Information Sharing",
-      "paragraph1": "We do NOT sell, rent, or share your personal information with third parties for advertising purposes.",
-      "paragraph2": "Your data may be shared with service providers who support our operations (e.g., email delivery providers, analytics tools), but only under strict data processing agreements (DPAs) in accordance with GDPR.",
-      "note": "Your information is used solely for providing Kids Only services and is never shared with third-party advertisers."
+      "title": "Обмен информацией",
+      "paragraph1": "Мы не продаем, не сдаем в аренду и не передаем вашу личную информацию третьим лицам в рекламных целях.",
+      "paragraph2": "Ваши данные могут быть переданы поставщикам услуг, которые поддерживают нашу деятельность, но только в соответствии со строгими соглашениями об обработке данных (DPA) в соответствии с GDPR.",
+      "brevoNote": "В частности, мы используем Brevo (Sendinblue GmbH) для управления электронными коммуникациями, новостными рассылками и маркетинговой автоматизацией. Brevo обрабатывает данные в соответствии с GDPR и предоставляет инструменты для помощи в осуществлении ваших прав (доступ, исправление, удаление, портируемость и возражение).",
+      "partnersNote": "Мы тщательно выбираем и контролируем наших партнеров, чтобы убедиться, что они применяют соответствующие технические и организационные меры для защиты персональных данных."
     },
     "internationalTransfers": {
-      "title": "International Transfers",
-      "description": "If we transfer data outside the EU/EEA (e.g., to email marketing platforms like Mailchimp), such transfers are secured through Standard Contractual Clauses (SCCs) or other recognized safeguards."
+      "title": "Международные передачи",
+      "description": "Brevo хранит и обрабатывает данные в основном на серверах в пределах ЕС (например, Франция, Германия). Передачи за пределы ЕС/ЕЭЗ, если это необходимо, защищены с использованием Стандартных договорных положений (SCC) или других признанных гарантий.",
+      "controllerNote": "Как контроллер данных, мы остаемся ответственными за выбор соответствующих поставщиков и обеспечение того, чтобы любая международная передача данных соответствовала требованиям GDPR."
     },
     "dataRetention": {
-      "title": "Data Retention",
-      "description": "We retain personal data only as long as necessary to fulfill the purposes stated above or as required by law. After this period, data is securely deleted or anonymized."
+      "title": "Хранение данных",
+      "description": "Мы храним персональные данные только столько времени, сколько необходимо для выполнения целей, указанных выше, или в соответствии с требованиями закона. После этого периода данные безопасно удаляются или анонимизируются.",
+      "inactiveNote": "Неактивные аккаунты, отписавшиеся пользователи или данные, которые больше не нужны для операционных целей, будут периодически удаляться для минимизации риска утечек данных."
     },
     "yourRights": {
-      "title": "Your Rights Under GDPR",
-      "description": "You have the following rights under the GDPR:",
-      "right1": "Right of access",
-      "right1Desc": "request information about the data we hold on you",
-      "right2": "Right to rectification",
-      "right2Desc": "correct inaccurate data",
-      "right3": "Right to erasure",
-      "right3Desc": "request deletion of your data",
-      "right4": "Right to restriction of processing",
-      "right5": "Right to data portability",
-      "right6": "Right to object to data processing",
-      "right7": "Right to withdraw consent at any time",
-      "contact": "To exercise these rights, contact us at"
+      "title": "Ваши права в соответствии с GDPR",
+      "description": "В соответствии с GDPR у вас есть следующие права:",
+      "right1": "Право доступа",
+      "right1Desc": "запросить информацию о данных, которые мы храним о вас",
+      "right2": "Право на исправление",
+      "right2Desc": "исправить неточные данные",
+      "right3": "Право на удаление",
+      "right3Desc": "запросить удаление ваших данных",
+      "right4": "Право на ограничение обработки",
+      "right5": "Право на портируемость данных",
+      "right6": "Право возражать против обработки данных",
+      "right7": "Право отозвать согласие в любое время",
+      "contact": "Для осуществления этих прав свяжитесь с нами по адресу",
+      "brevoRights": "Кроме того, Brevo предоставляет инструменты для помощи в осуществлении этих прав в отношении данных, обрабатываемых их услугами."
     },
     "dataSecurity": {
-      "title": "Data Security",
-      "description": "We implement technical and organizational security measures, including:",
-      "measure1": "Encryption of data during transmission and storage",
-      "measure2": "Firewalls and secure server infrastructure",
-      "measure3": "Regular security audits",
-      "measure4": "Access control policies and staff training"
+      "title": "Безопасность данных",
+      "description": "Мы применяем технические и организационные меры безопасности для защиты ваших персональных данных, включая:",
+      "measure1": "Шифрование данных при передаче и хранении",
+      "measure2": "Файрволы и безопасная серверная инфраструктура",
+      "measure3": "Регулярные аудиты безопасности и тестирование на проникновение",
+      "measure4": "Политики контроля доступа, ограничивающие доступ к данным только авторизованному персоналу",
+      "measure5": "Обучение персонала по защите данных и соблюдению GDPR",
+      "breachNote": "Хотя мы принимаем все разумные меры для защиты данных, ни одна система не является полностью безопасной. В маловероятном случае утечки данных мы будем следовать требованиям GDPR по уведомлению властей и затронутых лиц."
     },
     "cookies": {
-      "title": "Cookies and Tracking",
-      "description": "We may use cookies or similar technologies in our app or website. You will be informed via cookie banner and can choose your preferences."
+      "title": "Файлы cookie и отслеживание",
+      "description": "Мы можем использовать файлы cookie или аналогичные технологии в нашем приложении или веб-сайте. Вы будете проинформированы через баннер cookie и можете выбрать свои предпочтения. Файлы cookie помогают нам улучшить пользовательский опыт и измерить производительность услуг."
+    },
+    "responsibility": {
+      "title": "Ответственность и обязательства",
+      "description": "Как контроллер данных, мы несем ответственность за обеспечение законной обработки персональных данных.",
+      "brevoProcessor": "Brevo действует как обработчик данных по нашим инструкциям. Хотя Brevo применяет меры безопасности, соответствующие GDPR, мы остаемся ответственными за обеспечение того, чтобы ваши данные собирались, обрабатывались и хранились законно.",
+      "breachResponsibility": "Ответственность за любую утечку данных распределяется в зависимости от обстоятельств:",
+      "ourLiability": "Если утечка является результатом наших действий или халатности (например, незащищенные формы, неправильное обращение с данными), мы несем ответственность.",
+      "brevoLiability": "Если утечка является результатом технического сбоя Brevo, Brevo несет основную ответственность, но мы обязаны надлежащим образом реагировать в соответствии с GDPR."
     },
     "contact": {
-      "title": "Contact and Complaints",
-      "description": "If you have questions about this policy or wish to make a complaint, contact us at:",
-      "email": "Email",
-      "phone": "Phone",
-      "address": "Address",
-      "complaint": "If you believe your data protection rights have been violated, you have the right to file a complaint with the Austrian Data Protection Authority (Datenschutzbehörde):"
+      "title": "Контакты и жалобы",
+      "description": "Если у вас есть вопросы об этой политике или вы хотите подать жалобу, свяжитесь с нами по адресу:",
+      "email": "Электронная почта",
+      "phone": "Телефон",
+      "address": "Адрес",
+      "complaint": "Если вы считаете, что ваши права на защиту данных были нарушены, вы имеете право подать жалобу в Австрийский орган по защите данных (Datenschutzbehörde):"
     },
     "changes": {
-      "title": "Changes to This Privacy Policy",
-      "description": "We may update this Privacy Policy from time to time. We will inform you about significant changes through our app or website."
+      "title": "Изменения в этой Политике конфиденциальности",
+      "description": "Мы можем время от времени обновлять эту Политику конфиденциальности. Мы будем информировать вас о значительных изменениях через наше приложение или веб-сайт."
     },
     "footer": {
-      "text": "If you have questions about our Privacy Policy, please contact us."
+      "text": "Если у вас есть вопросы о нашей Политике конфиденциальности, пожалуйста, свяжитесь с нами."
     }
   }
 }

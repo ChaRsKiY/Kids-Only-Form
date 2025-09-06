@@ -14,6 +14,7 @@ export default function PrivacyPolicyPage() {
     { code: 'en', label: 'English' },
     { code: 'de', label: 'Deutsch' },
     { code: 'ru', label: 'Русский' },
+    { code: 'sk', label: 'Slovenčina' },
   ];
 
   return (
@@ -97,6 +98,9 @@ export default function PrivacyPolicyPage() {
                   </div>
                 </div>
               </div>
+              <p className="text-gray-700 leading-relaxed mt-4">
+                {t('dataController.afterDescription')}
+              </p>
             </div>
 
             {/* Information We Collect */}
@@ -149,7 +153,11 @@ export default function PrivacyPolicyPage() {
                 <li>{t('howWeUse.purpose3')}</li>
                 <li>{t('howWeUse.purpose4')}</li>
                 <li>{t('howWeUse.purpose5')}</li>
+                <li>{t('howWeUse.purpose6')}</li>
               </ul>
+              <p className="text-gray-700 leading-relaxed mt-4">
+                {t('howWeUse.afterDescription')}
+              </p>
             </div>
 
             {/* Legal Basis */}
@@ -166,6 +174,9 @@ export default function PrivacyPolicyPage() {
                 <li>{t('legalBasis.legal')}</li>
                 <li>{t('legalBasis.legitimate')}</li>
               </ul>
+              <p className="text-gray-700 leading-relaxed mt-4">
+                {t('legalBasis.childrenNote')}
+              </p>
             </div>
 
             {/* Information Sharing */}
@@ -179,9 +190,12 @@ export default function PrivacyPolicyPage() {
               <p className="text-gray-700 leading-relaxed mb-4">
                 {t('informationSharing.paragraph2')}
               </p>
+              <p className="text-gray-700 leading-relaxed mb-4">
+                {t('informationSharing.brevoNote')}
+              </p>
               <div className="bg-primary/10 border-l-4 border-primary p-4 rounded">
                 <p className="text-primary font-medium">
-                  {t('informationSharing.note')}
+                  {t('informationSharing.partnersNote')}
                 </p>
               </div>
             </div>
@@ -194,6 +208,9 @@ export default function PrivacyPolicyPage() {
               <p className="text-gray-700 leading-relaxed">
                 {t('internationalTransfers.description')}
               </p>
+              <p className="text-gray-700 leading-relaxed mt-4">
+                {t('internationalTransfers.controllerNote')}
+              </p>
             </div>
 
             {/* Data Retention */}
@@ -203,6 +220,9 @@ export default function PrivacyPolicyPage() {
               </h2>
               <p className="text-gray-700 leading-relaxed">
                 {t('dataRetention.description')}
+              </p>
+              <p className="text-gray-700 leading-relaxed mt-4">
+                {t('dataRetention.inactiveNote')}
               </p>
             </div>
 
@@ -226,6 +246,9 @@ export default function PrivacyPolicyPage() {
               <p className="text-gray-700 leading-relaxed mt-4">
                 {t('yourRights.contact')} <a href="mailto:privacy@kidsonly.com" className="text-primary hover:underline">privacy@kidsonly.com</a>.
               </p>
+              <p className="text-gray-700 leading-relaxed mt-4">
+                {t('yourRights.brevoRights')}
+              </p>
             </div>
 
             {/* Data Security */}
@@ -241,7 +264,11 @@ export default function PrivacyPolicyPage() {
                 <li>{t('dataSecurity.measure2')}</li>
                 <li>{t('dataSecurity.measure3')}</li>
                 <li>{t('dataSecurity.measure4')}</li>
+                <li>{t('dataSecurity.measure5')}</li>
               </ul>
+              <p className="text-gray-700 leading-relaxed mt-4">
+                {t('dataSecurity.breachNote')}
+              </p>
             </div>
 
             {/* Cookies */}
@@ -254,10 +281,31 @@ export default function PrivacyPolicyPage() {
               </p>
             </div>
 
+            <div className="mb-8">
+              <h2 className="text-2xl font-semibold text-gray-900 mb-4">
+                12. {t('responsibility.title')}
+              </h2>
+              <p className="text-gray-700 leading-relaxed">
+                {t('responsibility.description')}
+              </p>
+              <p className="text-gray-700 leading-relaxed mt-4">
+                {t('responsibility.brevoProcessor')}
+              </p>
+              <p className="text-gray-700 leading-relaxed mt-4">
+                {t('responsibility.breachResponsibility')}
+              </p>
+              <p className="text-gray-700 leading-relaxed mt-4">
+                {t('responsibility.ourLiability')}
+              </p>
+              <p className="text-gray-700 leading-relaxed mt-4">
+                {t('responsibility.brevoLiability')}
+              </p>
+            </div>
+
             {/* Contact Information */}
             <div className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                12. {t('contact.title')}
+                13. {t('contact.title')}
               </h2>
               <p className="text-gray-700 leading-relaxed mb-4">
                 {t('contact.description')}
@@ -306,7 +354,7 @@ export default function PrivacyPolicyPage() {
             {/* Changes */}
             <div className="mb-8">
               <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                13. {t('changes.title')}
+                14. {t('changes.title')}
               </h2>
               <p className="text-gray-700 leading-relaxed">
                 {t('changes.description')}

@@ -1000,109 +1000,127 @@
     "cannotActivateWithoutTemplate": "Cannot activate automation without a template"
   },
   "privacy": {
-    "back": "Back",
-    "title": "Privacy Policy",
-    "lastUpdated": "Last Updated",
-    "lastUpdatedDate": "January 1, 2024",
+    "back": "Zurück",
+    "title": "Datenschutzerklärung",
+    "lastUpdated": "Zuletzt aktualisiert",
+    "lastUpdatedDate": "1. Januar 2024",
     "introduction": {
-      "title": "Introduction",
-      "paragraph1": "Kids Only (\"we\", \"our\", or \"us\") values your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, store, and protect the information you provide when using our services, in accordance with the General Data Protection Regulation (GDPR).",
-      "paragraph2": "By using our services, you agree to the practices described in this Privacy Policy."
+      "title": "Einführung",
+      "paragraph1": "Kids Only ('wir', 'unser' oder 'uns') schätzt Ihre Privatsphäre und ist dem Schutz Ihrer persönlichen Informationen verpflichtet. Diese Datenschutzerklärung erklärt, wie wir die Informationen sammeln, verwenden, speichern und schützen, die Sie bei der Nutzung unserer Dienste bereitstellen, in Übereinstimmung mit der Datenschutz-Grundverordnung (DSGVO).",
+      "paragraph2": "Durch die Nutzung unserer Dienste stimmen Sie den in dieser Datenschutzerklärung beschriebenen Praktiken zu."
     },
     "dataController": {
-      "title": "Data Controller",
-      "description": "The data controller for the processing of your personal data is:"
+      "title": "Datenverantwortlicher",
+      "description": "Der Datenverantwortliche für die Verarbeitung Ihrer personenbezogenen Daten ist:",
+      "afterDescription": "Als Datenverantwortlicher bestimmen wir die Zwecke und Mittel der Verarbeitung Ihrer personenbezogenen Daten und sind für die Einhaltung der DSGVO verantwortlich."
     },
     "informationWeCollect": {
-      "title": "Information We Collect",
+      "title": "Informationen, die wir sammeln",
       "personal": {
-        "title": "Personal Information",
-        "name": "First and last name",
-        "email": "Email address",
-        "phone": "Phone number",
-        "address": "Residential address",
-        "dob": "Date of birth"
+        "title": "Persönliche Informationen",
+        "name": "Vor- und Nachname",
+        "email": "E-Mail-Adresse",
+        "phone": "Telefonnummer",
+        "address": "Wohnadresse",
+        "dob": "Geburtsdatum"
       },
       "children": {
-        "title": "Children's Information",
-        "name": "Children's names",
-        "gender": "Children's gender",
-        "dob": "Children's dates of birth",
-        "note": "We only collect children's data with the explicit consent of the parent or legal guardian."
+        "title": "Informationen über Kinder",
+        "name": "Namen der Kinder",
+        "gender": "Geschlecht der Kinder",
+        "dob": "Geburtsdaten der Kinder",
+        "note": "Wir sammeln Daten von Kindern nur mit ausdrücklicher Zustimmung der Eltern oder des gesetzlichen Vormunds."
       }
     },
     "howWeUse": {
-      "title": "How We Use Your Information",
-      "description": "We use your information for the following purposes:",
-      "purpose1": "To provide and improve our services",
-      "purpose2": "To send personalized email notifications (e.g., newsletters, offers)",
-      "purpose3": "To communicate with you about service-related matters",
-      "purpose4": "To comply with legal and regulatory obligations",
-      "purpose5": "To ensure the safety and integrity of our services"
+      "title": "Wie wir Ihre Informationen verwenden",
+      "description": "Wir verwenden Ihre Informationen für folgende Zwecke:",
+      "purpose1": "Zur Bereitstellung und Verbesserung unserer Dienste",
+      "purpose2": "Zur Sendung personalisierter E-Mail-Benachrichtigungen (z.B. Newsletter, Angebote)",
+      "purpose3": "Zur Kommunikation mit Ihnen über dienstbezogene Angelegenheiten",
+      "purpose4": "Zur Einhaltung rechtlicher und regulatorischer Verpflichtungen",
+      "purpose5": "Zur Gewährleistung der Sicherheit und Integrität unserer Dienste",
+      "purpose6": "Zur Führung genauer Aufzeichnungen und zur Betrugsprävention",
+      "afterDescription": "Wir werden Ihre persönlichen Informationen niemals für andere Zwecke als die in dieser Richtlinie ausdrücklich angegebenen verwenden, ohne Ihre Zustimmung einzuholen."
     },
     "legalBasis": {
-      "title": "Legal Basis for Processing",
-      "description": "We process your data based on one or more of the following legal bases under Article 6 of the GDPR:",
-      "consent": "Your consent (Art. 6(1)(a) GDPR)",
-      "contract": "Contract performance (Art. 6(1)(b) GDPR)",
-      "legal": "Legal obligations (Art. 6(1)(c) GDPR)",
-      "legitimate": "Legitimate interests (Art. 6(1)(f) GDPR), such as service optimization and fraud prevention"
+      "title": "Rechtsgrundlage für die Verarbeitung",
+      "description": "Wir verarbeiten Ihre Daten auf Grundlage einer oder mehrerer der folgenden Rechtsgrundlagen nach Artikel 6 der DSGVO:",
+      "consent": "Einverständnis (Art. 6(1)(a) DSGVO)",
+      "contract": "Vertragserfüllung (Art. 6(1)(b) DSGVO)",
+      "legal": "Rechtliche Verpflichtungen (Art. 6(1)(c) DSGVO)",
+      "legitimate": "Berechtigte Interessen (Art. 6(1)(f) DSGVO), wie Dienstoptimierung und Betrugsprävention",
+      "childrenNote": "Für Kindesdaten verarbeiten wir nur mit ausdrücklicher Zustimmung der Eltern oder des gesetzlichen Vormunds, in Übereinstimmung mit Artikel 8 DSGVO."
     },
     "informationSharing": {
-      "title": "Information Sharing",
-      "paragraph1": "We do NOT sell, rent, or share your personal information with third parties for advertising purposes.",
-      "paragraph2": "Your data may be shared with service providers who support our operations (e.g., email delivery providers, analytics tools), but only under strict data processing agreements (DPAs) in accordance with GDPR.",
-      "note": "Your information is used solely for providing Kids Only services and is never shared with third-party advertisers."
+      "title": "Informationsaustausch",
+      "paragraph1": "Wir verkaufen, vermieten oder teilen Ihre persönlichen Informationen nicht mit Dritten zu Werbezwecken.",
+      "paragraph2": "Ihre Daten können mit Dienstleistern geteilt werden, die unsere Betriebe unterstützen, aber nur unter strengen Datenverarbeitungsvereinbarungen (DPAs) in Übereinstimmung mit der DSGVO.",
+      "brevoNote": "Insbesondere verwenden wir Brevo (Sendinblue GmbH) für die Verwaltung von E-Mail-Kommunikation, Newslettern und Marketing-Automatisierung. Brevo verarbeitet Daten gemäß DSGVO und bietet Tools zur Ausübung Ihrer Rechte (Zugang, Berichtigung, Löschung, Portabilität und Widerspruch).",
+      "partnersNote": "Wir wählen unsere Partner sorgfältig aus und überwachen sie, um sicherzustellen, dass sie angemessene technische und organisatorische Maßnahmen zum Schutz personenbezogener Daten implementieren."
     },
     "internationalTransfers": {
-      "title": "International Transfers",
-      "description": "If we transfer data outside the EU/EEA (e.g., to email marketing platforms like Mailchimp), such transfers are secured through Standard Contractual Clauses (SCCs) or other recognized safeguards."
+      "title": "Internationale Übertragungen",
+      "description": "Brevo speichert und verarbeitet Daten hauptsächlich auf Servern innerhalb der EU (z.B. Frankreich, Deutschland). Übertragungen außerhalb der EU/EWR werden, falls erforderlich, durch Standardvertragsklauseln (SCCs) oder andere anerkannte Schutzmaßnahmen gesichert.",
+      "controllerNote": "Als Datenverantwortlicher bleiben wir für die Auswahl konformer Anbieter und die Gewährleistung verantwortlich, dass jede internationale Datenübertragung den DSGVO-Anforderungen entspricht."
     },
     "dataRetention": {
-      "title": "Data Retention",
-      "description": "We retain personal data only as long as necessary to fulfill the purposes stated above or as required by law. After this period, data is securely deleted or anonymized."
+      "title": "Datenspeicherung",
+      "description": "Wir speichern personenbezogene Daten nur so lange, wie es zur Erfüllung der oben genannten Zwecke oder nach den gesetzlichen Anforderungen erforderlich ist. Nach diesem Zeitraum werden die Daten sicher gelöscht oder anonymisiert.",
+      "inactiveNote": "Inaktive Konten, abgemeldete Benutzer oder Daten, die für betriebliche Zwecke nicht mehr benötigt werden, werden regelmäßig gelöscht, um das Risiko von Datenverletzungen zu minimieren."
     },
     "yourRights": {
-      "title": "Your Rights Under GDPR",
-      "description": "You have the following rights under the GDPR:",
-      "right1": "Right of access",
-      "right1Desc": "request information about the data we hold on you",
-      "right2": "Right to rectification",
-      "right2Desc": "correct inaccurate data",
-      "right3": "Right to erasure",
-      "right3Desc": "request deletion of your data",
-      "right4": "Right to restriction of processing",
-      "right5": "Right to data portability",
-      "right6": "Right to object to data processing",
-      "right7": "Right to withdraw consent at any time",
-      "contact": "To exercise these rights, contact us at"
+      "title": "Ihre Rechte unter der DSGVO",
+      "description": "Sie haben folgende Rechte unter der DSGVO:",
+      "right1": "Recht auf Zugang",
+      "right1Desc": "Informationen über die von uns gespeicherten Daten anfordern",
+      "right2": "Recht auf Berichtigung",
+      "right2Desc": "unrichtige Daten korrigieren",
+      "right3": "Recht auf Löschung",
+      "right3Desc": "Löschung Ihrer Daten anfordern",
+      "right4": "Recht auf Einschränkung der Verarbeitung",
+      "right5": "Recht auf Datenübertragbarkeit",
+      "right6": "Recht auf Widerspruch gegen die Datenverarbeitung",
+      "right7": "Recht, die Einwilligung jederzeit zu widerrufen",
+      "contact": "Um diese Rechte auszuüben, kontaktieren Sie uns unter",
+      "brevoRights": "Zusätzlich bietet Brevo Tools zur Ausübung dieser Rechte in Bezug auf von ihren Diensten verarbeitete Daten."
     },
     "dataSecurity": {
-      "title": "Data Security",
-      "description": "We implement technical and organizational security measures, including:",
-      "measure1": "Encryption of data during transmission and storage",
-      "measure2": "Firewalls and secure server infrastructure",
-      "measure3": "Regular security audits",
-      "measure4": "Access control policies and staff training"
+      "title": "Datensicherheit",
+      "description": "Wir implementieren technische und organisatorische Sicherheitsmaßnahmen zum Schutz Ihrer personenbezogenen Daten, einschließlich:",
+      "measure1": "Verschlüsselung von Daten während der Übertragung und Speicherung",
+      "measure2": "Firewalls und sichere Serverinfrastruktur",
+      "measure3": "Regelmäßige Sicherheitsaudits und Penetrationstests",
+      "measure4": "Zugangskontrollrichtlinien, die den Datenzugang nur auf autorisiertes Personal beschränken",
+      "measure5": "Schulung des Personals zum Datenschutz und zur DSGVO-Compliance",
+      "breachNote": "Obwohl wir alle angemessenen Maßnahmen zum Datenschutz ergreifen, ist kein System vollständig sicher. Im unwahrscheinlichen Fall einer Datenverletzung werden wir den DSGVO-Anforderungen für die Benachrichtigung von Behörden und betroffenen Personen folgen."
     },
     "cookies": {
-      "title": "Cookies and Tracking",
-      "description": "We may use cookies or similar technologies in our app or website. You will be informed via cookie banner and can choose your preferences."
+      "title": "Cookies und Tracking",
+      "description": "Wir können Cookies oder ähnliche Technologien in unserer App oder Website verwenden. Sie werden über ein Cookie-Banner informiert und können Ihre Präferenzen wählen. Cookies helfen uns, die Benutzererfahrung zu verbessern und die Dienstleistungsleistung zu messen."
+    },
+    "responsibility": {
+      "title": "Verantwortung und Haftung",
+      "description": "Als Datenverantwortlicher sind wir für die Gewährleistung einer rechtmäßigen Verarbeitung personenbezogener Daten verantwortlich.",
+      "brevoProcessor": "Brevo fungiert als Datenverarbeiter nach unseren Anweisungen. Während Brevo DSGVO-konforme Sicherheitsmaßnahmen implementiert, bleiben wir dafür verantwortlich, dass Ihre Daten rechtmäßig gesammelt, verarbeitet und gespeichert werden.",
+      "breachResponsibility": "Die Verantwortung für jede Datenverletzung wird je nach Umständen geteilt:",
+      "ourLiability": "Wenn die Verletzung auf unsere Handlungen oder Nachlässigkeit zurückzuführen ist (z.B. ungeschützte Formulare, unsachgemäße Datenbehandlung), sind wir haftbar.",
+      "brevoLiability": "Wenn die Verletzung auf einen technischen Fehler von Brevo zurückzuführen ist, ist Brevo hauptsächlich haftbar, aber wir sind verpflichtet, angemessen nach DSGVO zu reagieren."
     },
     "contact": {
-      "title": "Contact and Complaints",
-      "description": "If you have questions about this policy or wish to make a complaint, contact us at:",
-      "email": "Email",
-      "phone": "Phone",
-      "address": "Address",
-      "complaint": "If you believe your data protection rights have been violated, you have the right to file a complaint with the Austrian Data Protection Authority (Datenschutzbehörde):"
+      "title": "Kontakt und Beschwerden",
+      "description": "Wenn Sie Fragen zu dieser Richtlinie haben oder eine Beschwerde einreichen möchten, kontaktieren Sie uns unter:",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "address": "Adresse",
+      "complaint": "Wenn Sie glauben, dass Ihre Datenschutzrechte verletzt wurden, haben Sie das Recht, eine Beschwerde bei der österreichischen Datenschutzbehörde (Datenschutzbehörde) einzureichen:"
     },
     "changes": {
-      "title": "Changes to This Privacy Policy",
-      "description": "We may update this Privacy Policy from time to time. We will inform you about significant changes through our app or website."
+      "title": "Änderungen an dieser Datenschutzerklärung",
+      "description": "Wir können diese Datenschutzerklärung von Zeit zu Zeit aktualisieren. Wir werden Sie über wesentliche Änderungen über unsere App oder Website informieren."
     },
     "footer": {
-      "text": "If you have questions about our Privacy Policy, please contact us."
+      "text": "Wenn Sie Fragen zu unserer Datenschutzerklärung haben, kontaktieren Sie uns bitte."
     }
   }
 }

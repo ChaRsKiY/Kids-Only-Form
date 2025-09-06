@@ -1000,109 +1000,127 @@
     "cannotActivateWithoutTemplate": "Cannot activate automation without a template"
   },
   "privacy": {
-    "back": "Back",
-    "title": "Privacy Policy",
-    "lastUpdated": "Last Updated",
-    "lastUpdatedDate": "January 1, 2024",
+    "back": "Späť",
+    "title": "Zásady ochrany osobných údajov",
+    "lastUpdated": "Naposledy aktualizované",
+    "lastUpdatedDate": "1. január 2024",
     "introduction": {
-      "title": "Introduction",
-      "paragraph1": "Kids Only (\"we\", \"our\", or \"us\") values your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, store, and protect the information you provide when using our services, in accordance with the General Data Protection Regulation (GDPR).",
-      "paragraph2": "By using our services, you agree to the practices described in this Privacy Policy."
+      "title": "Úvod",
+      "paragraph1": "Kids Only ('my', 'náš' alebo 'nás') si váži vaše súkromie a je odhodlané chrániť vaše osobné informácie. Tieto Zásady ochrany osobných údajov vysvetľujú, ako zbierame, používame, ukladáme a chránime informácie, ktoré nám poskytujete pri používaní našich služieb, v súlade s Všeobecným nariadením o ochrane údajov (GDPR).",
+      "paragraph2": "Používaním našich služieb súhlasíte s praktikami opísanými v týchto Zásadách ochrany osobných údajov."
     },
     "dataController": {
-      "title": "Data Controller",
-      "description": "The data controller for the processing of your personal data is:"
+      "title": "Správca údajov",
+      "description": "Správcom údajov pre spracovanie vašich osobných údajov je:",
+      "afterDescription": "Ako správca údajov určujeme účely a prostriedky spracovania vašich osobných údajov a sme zodpovední za zabezpečenie súladu s GDPR."
     },
     "informationWeCollect": {
-      "title": "Information We Collect",
+      "title": "Informácie, ktoré zbierame",
       "personal": {
-        "title": "Personal Information",
-        "name": "First and last name",
-        "email": "Email address",
-        "phone": "Phone number",
-        "address": "Residential address",
-        "dob": "Date of birth"
+        "title": "Osobné informácie",
+        "name": "Meno a priezvisko",
+        "email": "E-mailová adresa",
+        "phone": "Telefónne číslo",
+        "address": "Domovská adresa",
+        "dob": "Dátum narodenia"
       },
       "children": {
-        "title": "Children's Information",
-        "name": "Children's names",
-        "gender": "Children's gender",
-        "dob": "Children's dates of birth",
-        "note": "We only collect children's data with the explicit consent of the parent or legal guardian."
+        "title": "Informácie o deťoch",
+        "name": "Menná detí",
+        "gender": "Pohlavie detí",
+        "dob": "Dátumy narodenia detí",
+        "note": "Údaje o deťoch zbierame len s výslovným súhlasom rodiča alebo zákonného zástupcu."
       }
     },
     "howWeUse": {
-      "title": "How We Use Your Information",
-      "description": "We use your information for the following purposes:",
-      "purpose1": "To provide and improve our services",
-      "purpose2": "To send personalized email notifications (e.g., newsletters, offers)",
-      "purpose3": "To communicate with you about service-related matters",
-      "purpose4": "To comply with legal and regulatory obligations",
-      "purpose5": "To ensure the safety and integrity of our services"
+      "title": "Ako používame vaše informácie",
+      "description": "Vaše informácie používame na tieto účely:",
+      "purpose1": "Na poskytovanie a zlepšovanie našich služieb",
+      "purpose2": "Na odosielanie personalizovaných e-mailových oznámení (napr. newsletterov, ponúk)",
+      "purpose3": "Na komunikáciu s vami o záležitostiach súvisiacich so službami",
+      "purpose4": "Na dodržiavanie právnych a regulačných povinností",
+      "purpose5": "Na zabezpečenie bezpečnosti a integrity našich služieb",
+      "purpose6": "Na vedenie presných záznamov a prevenciu podvodov",
+      "afterDescription": "Vaše osobné informácie nikdy nepoužijeme na iné účely ako tie, ktoré sú v tejto politike výslovne uvedené, bez získania vášho súhlasu."
     },
     "legalBasis": {
-      "title": "Legal Basis for Processing",
-      "description": "We process your data based on one or more of the following legal bases under Article 6 of the GDPR:",
-      "consent": "Your consent (Art. 6(1)(a) GDPR)",
-      "contract": "Contract performance (Art. 6(1)(b) GDPR)",
-      "legal": "Legal obligations (Art. 6(1)(c) GDPR)",
-      "legitimate": "Legitimate interests (Art. 6(1)(f) GDPR), such as service optimization and fraud prevention"
+      "title": "Právny základ pre spracovanie",
+      "description": "Vaše údaje spracovávame na základe jedného alebo viacerých z nasledujúcich právnych základov podľa článku 6 GDPR:",
+      "consent": "Súhlas (čl. 6(1)(a) GDPR)",
+      "contract": "Vykonávanie zmluvy (čl. 6(1)(b) GDPR)",
+      "legal": "Právne povinnosti (čl. 6(1)(c) GDPR)",
+      "legitimate": "Oprávnené záujmy (čl. 6(1)(f) GDPR), ako je optimalizácia služieb a prevencia podvodov",
+      "childrenNote": "Pre údaje detí spracovávame len s výslovným súhlasom rodiča alebo zákonného zástupcu, v súlade s článkom 8 GDPR."
     },
     "informationSharing": {
-      "title": "Information Sharing",
-      "paragraph1": "We do NOT sell, rent, or share your personal information with third parties for advertising purposes.",
-      "paragraph2": "Your data may be shared with service providers who support our operations (e.g., email delivery providers, analytics tools), but only under strict data processing agreements (DPAs) in accordance with GDPR.",
-      "note": "Your information is used solely for providing Kids Only services and is never shared with third-party advertisers."
+      "title": "Zdieľanie informácií",
+      "paragraph1": "Nepredávame, neprenajíname ani nezdieľame vaše osobné informácie s tretími stranami na reklamné účely.",
+      "paragraph2": "Vaše údaje môžu byť zdieľané s poskytovateľmi služieb, ktorí podporujú naše operácie, ale len v rámci prísnych dohôd o spracovaní údajov (DPA) v súlade s GDPR.",
+      "brevoNote": "Konkrétne používame Brevo (Sendinblue GmbH) na správu e-mailovej komunikácie, newsletterov a marketingovej automatizácie. Brevo spracováva údaje v súlade s GDPR a poskytuje nástroje na pomoc pri uplatňovaní vašich práv (prístup, oprava, vymazanie, prenosnosť a námietka).",
+      "partnersNote": "Našich partnerov starostlivo vyberáme a monitorujeme, aby sme sa uistili, že implementujú primerané technické a organizačné opatrenia na ochranu osobných údajov."
     },
     "internationalTransfers": {
-      "title": "International Transfers",
-      "description": "If we transfer data outside the EU/EEA (e.g., to email marketing platforms like Mailchimp), such transfers are secured through Standard Contractual Clauses (SCCs) or other recognized safeguards."
+      "title": "Medzinárodné prenosy",
+      "description": "Brevo ukladá a spracováva údaje primárne na serveroch v rámci EÚ (napr. Francúzsko, Nemecko). Prenosy mimo EÚ/EHP, ak sú potrebné, sú zabezpečené pomocou štandardných zmluvných klauzúl (SCC) alebo iných uznávaných záruk.",
+      "controllerNote": "Ako správca údajov zostávame zodpovední za výber súladných poskytovateľov a zabezpečenie, že akýkoľvek medzinárodný prenos údajov je v súlade s požiadavkami GDPR."
     },
     "dataRetention": {
-      "title": "Data Retention",
-      "description": "We retain personal data only as long as necessary to fulfill the purposes stated above or as required by law. After this period, data is securely deleted or anonymized."
+      "title": "Uchovávanie údajov",
+      "description": "Osobné údaje uchovávame len tak dlho, ako je potrebné na splnenie vyššie uvedených účelov alebo podľa zákonných požiadaviek. Po tomto období sú údaje bezpečne vymazané alebo anonymizované.",
+      "inactiveNote": "Neaktívne účty, odhlásení používatelia alebo údaje, ktoré už nie sú potrebné na prevádzkové účely, budú pravidelne mazané na minimalizáciu rizika úniku údajov."
     },
     "yourRights": {
-      "title": "Your Rights Under GDPR",
-      "description": "You have the following rights under the GDPR:",
-      "right1": "Right of access",
-      "right1Desc": "request information about the data we hold on you",
-      "right2": "Right to rectification",
-      "right2Desc": "correct inaccurate data",
-      "right3": "Right to erasure",
-      "right3Desc": "request deletion of your data",
-      "right4": "Right to restriction of processing",
-      "right5": "Right to data portability",
-      "right6": "Right to object to data processing",
-      "right7": "Right to withdraw consent at any time",
-      "contact": "To exercise these rights, contact us at"
+      "title": "Vaše práva podľa GDPR",
+      "description": "Podľa GDPR máte tieto práva:",
+      "right1": "Právo na prístup",
+      "right1Desc": "požiadať o informácie o údajoch, ktoré o vás uchovávame",
+      "right2": "Právo na opravu",
+      "right2Desc": "opraviť nesprávne údaje",
+      "right3": "Právo na vymazanie",
+      "right3Desc": "požiadať o vymazanie vašich údajov",
+      "right4": "Právo na obmedzenie spracovania",
+      "right5": "Právo na prenosnosť údajov",
+      "right6": "Právo namietať proti spracovaniu údajov",
+      "right7": "Právo kedykoľvek odvolať súhlas",
+      "contact": "Na uplatnenie týchto práv nás kontaktujte na",
+      "brevoRights": "Brevo navyše poskytuje nástroje na pomoc pri uplatňovaní týchto práv vo vzťahu k údajom spracovávaným ich službami."
     },
     "dataSecurity": {
-      "title": "Data Security",
-      "description": "We implement technical and organizational security measures, including:",
-      "measure1": "Encryption of data during transmission and storage",
-      "measure2": "Firewalls and secure server infrastructure",
-      "measure3": "Regular security audits",
-      "measure4": "Access control policies and staff training"
+      "title": "Bezpečnosť údajov",
+      "description": "Implementujeme technické a organizačné bezpečnostné opatrenia na ochranu vašich osobných údajov, vrátane:",
+      "measure1": "Šifrovanie údajov počas prenosu a ukladania",
+      "measure2": "Firewally a bezpečná serverová infraštruktúra",
+      "measure3": "Pravidelné bezpečnostné audity a penetračné testovanie",
+      "measure4": "Politiky kontroly prístupu obmedzujúce prístup k údajom len na autorizovaný personál",
+      "measure5": "Školenie personálu o ochrane údajov a súlade s GDPR",
+      "breachNote": "Hoci prijímame všetky primerané opatrenia na ochranu údajov, žiadny systém nie je úplne bezpečný. V nepravdepodobnom prípade úniku údajov budeme dodržiavať požiadavky GDPR na oznámenie orgánom a dotknutým osobám."
     },
     "cookies": {
-      "title": "Cookies and Tracking",
-      "description": "We may use cookies or similar technologies in our app or website. You will be informed via cookie banner and can choose your preferences."
+      "title": "Cookies a sledovanie",
+      "description": "Môžeme používať cookies alebo podobné technológie v našej aplikácii alebo webovej stránke. Budete informovaní cez cookie banner a môžete si vybrať svoje preferencie. Cookies nám pomáhajú zlepšovať používateľskú skúsenosť a merať výkonnosť služieb."
+    },
+    "responsibility": {
+      "title": "Zodpovednosť a záväzky",
+      "description": "Ako správca údajov sme zodpovední za zabezpečenie zákonného spracovania osobných údajov.",
+      "brevoProcessor": "Brevo pôsobí ako spracovateľ údajov podľa našich pokynov. Zatiaľ čo Brevo implementuje bezpečnostné opatrenia v súlade s GDPR, zostávame zodpovední za zabezpečenie, že vaše údaje sú zbierané, spracovávané a ukladané zákonne.",
+      "breachResponsibility": "Zodpovednosť za akýkoľvek únik údajov sa delí v závislosti od okolností:",
+      "ourLiability": "Ak je únik výsledkom našich činov alebo zanedbania (napr. nechránené formuláre, nesprávne zaobchádzanie s údajmi), nesieme zodpovednosť.",
+      "brevoLiability": "Ak je únik výsledkom technickej poruchy Brevo, Brevo nesie primárnu zodpovednosť, ale sme povinní reagovať primerane podľa GDPR."
     },
     "contact": {
-      "title": "Contact and Complaints",
-      "description": "If you have questions about this policy or wish to make a complaint, contact us at:",
-      "email": "Email",
-      "phone": "Phone",
-      "address": "Address",
-      "complaint": "If you believe your data protection rights have been violated, you have the right to file a complaint with the Austrian Data Protection Authority (Datenschutzbehörde):"
+      "title": "Kontakt a sťažnosti",
+      "description": "Ak máte otázky týkajúce sa tejto politiky alebo chcete podať sťažnosť, kontaktujte nás na:",
+      "email": "E-mail",
+      "phone": "Telefón",
+      "address": "Adresa",
+      "complaint": "Ak sa domnievate, že vaše práva na ochranu údajov boli porušené, máte právo podať sťažnosť u Rakúskeho úradu na ochranu údajov (Datenschutzbehörde):"
     },
     "changes": {
-      "title": "Changes to This Privacy Policy",
-      "description": "We may update this Privacy Policy from time to time. We will inform you about significant changes through our app or website."
+      "title": "Zmeny v týchto Zásadách ochrany osobných údajov",
+      "description": "Tieto Zásady ochrany osobných údajov môžeme čas od času aktualizovať. O významných zmenách vás budeme informovať cez našu aplikáciu alebo webovú stránku."
     },
     "footer": {
-      "text": "If you have questions about our Privacy Policy, please contact us."
+      "text": "Ak máte otázky týkajúce sa našich Zásad ochrany osobných údajov, kontaktujte nás."
     }
   }
 }
