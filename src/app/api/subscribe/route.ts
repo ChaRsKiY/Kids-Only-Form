@@ -153,21 +153,21 @@ export const POST = async (req: NextRequest) => {
       });
 
     } catch (dbError) {
-      if (process.env.NODE_ENV !== 'production') {
-        console.error('Database error:', dbError);
+      if((dbError as any).response.data.code === "duplicate_parameter") {
+        return NextResponse.json({ 
+          error: "errors.emailAlreadyExists",
+          details: "Email already exists"
+        }, { status: 400 });
       }
       return NextResponse.json({ 
-        error: "Database operation failed",
-        details: "Unable to save subscription to database"
-      }, { status: 500 });
+        error: "errors.serverError",
+        details: "Unable to create contact"
+      }, { status: 400 });
     }
 
   } catch (parseError) {
-    if (process.env.NODE_ENV !== 'production') {
-      console.error('JSON parse error:', parseError);
-    }
     return NextResponse.json({ 
-      error: "Invalid JSON",
+      error: "errors.serverError",
       details: "Request body must be valid JSON"
     }, { status: 400 });
   }

@@ -85,7 +85,8 @@
     "incompleteChildData": "Prosím, vyplňte všetky údaje pre každé dieťa",
     "serverError": "Nastala chyba servera",
     "networkError": "Nastala sieťová chyba",
-    "invalidCaptcha": "Kontrola bota zlyhala. Skúste znova."
+    "invalidCaptcha": "Kontrola bota zlyhala. Skúste znova.",
+    "emailAlreadyExists": "Email už existuje"
   },
   "admin": {
     "login": {
@@ -988,16 +989,16 @@
       "loadingEditor": "Loading editor..."
     },
     "errors": {
-      "unauthorized": "Unauthorized",
-      "usernameRequired": "Username is required",
-      "passwordRequired": "Password is required",
-      "currentPasswordRequired": "Current password is required",
-      "newPasswordRequired": "New password is required",
-      "usernameTaken": "Username is already taken",
-      "invalidCredentials": "Invalid credentials",
-      "serverError": "Internal server error"
+      "unauthorized": "Neautorizovaný",
+      "usernameRequired": "Meno je povinné",
+      "passwordRequired": "Heslo je povinné",
+      "currentPasswordRequired": "Aktuálne heslo je povinné",
+      "newPasswordRequired": "Nové heslo je povinné",
+      "usernameTaken": "Meno už existuje",
+      "invalidCredentials": "Neplatné údaje",
+      "serverError": "Interná chyba servera"
     },
-    "cannotActivateWithoutTemplate": "Cannot activate automation without a template"
+    "cannotActivateWithoutTemplate": "Nemôžeš aktivovať automatizáciu bez šablóny"
   },
   "privacy": {
     "back": "Späť",

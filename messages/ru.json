@@ -85,7 +85,8 @@
     "incompleteChildData": "Пожалуйста, заполните все данные для каждого ребенка",
     "serverError": "Произошла ошибка сервера",
     "networkError": "Произошла сетевая ошибка",
-    "invalidCaptcha": "Проверка на бота не пройдена. Попробуйте ещё раз."
+    "invalidCaptcha": "Проверка на бота не пройдена. Попробуйте ещё раз.",
+    "emailAlreadyExists": "Почта уже существует"
   },
   "admin": {
     "login": {
@@ -988,16 +989,16 @@
       "loadingEditor": "Loading editor..."
     },
     "errors": {
-      "unauthorized": "Unauthorized",
-      "usernameRequired": "Username is required",
-      "passwordRequired": "Password is required",
-      "currentPasswordRequired": "Current password is required",
-      "newPasswordRequired": "New password is required",
-      "usernameTaken": "Username is already taken",
-      "invalidCredentials": "Invalid credentials",
-      "serverError": "Internal server error"
+      "unauthorized": "Не авторизован",
+      "usernameRequired": "Пользователь обязателен",
+      "passwordRequired": "Пароль обязателен",
+      "currentPasswordRequired": "Текущий пароль обязателен",
+      "newPasswordRequired": "Новый пароль обязателен",
+      "usernameTaken": "Пользователь уже существует",
+      "invalidCredentials": "Неверные учетные данные",
+      "serverError": "Внутренняя ошибка сервера"
     },
-    "cannotActivateWithoutTemplate": "Cannot activate automation without a template"
+    "cannotActivateWithoutTemplate": "Невозможно активировать автоматизацию без шаблона"
   },
   "privacy": {
     "back": "Назад",

@@ -85,7 +85,8 @@
     "incompleteChildData": "Bitte füllen Sie alle Daten für jedes Kind aus",
     "serverError": "Serverfehler aufgetreten",
     "networkError": "Netzwerkfehler aufgetreten",
-    "invalidCaptcha": "Bot‑Prüfung fehlgeschlagen. Bitte erneut versuchen."
+    "invalidCaptcha": "Bot‑Prüfung fehlgeschlagen. Bitte erneut versuchen.",
+    "emailAlreadyExists": "Email ist bereits vergeben"
   },
   "admin": {
     "login": {
@@ -988,14 +989,14 @@
       "loadingEditor": "Loading editor..."
     },
     "errors": {
-      "unauthorized": "Unauthorized",
-      "usernameRequired": "Username is required",
-      "passwordRequired": "Password is required",
-      "currentPasswordRequired": "Current password is required",
-      "newPasswordRequired": "New password is required",
-      "usernameTaken": "Username is already taken",
-      "invalidCredentials": "Invalid credentials",
-      "serverError": "Internal server error"
+      "unauthorized": "Unautorisiert",
+      "usernameRequired": "Username ist erforderlich",
+      "passwordRequired": "Passwort ist erforderlich",
+      "currentPasswordRequired": "Aktuelles Passwort ist erforderlich",
+      "newPasswordRequired": "Neues Passwort ist erforderlich",
+      "usernameTaken": "Username ist bereits vergeben",
+      "invalidCredentials": "Ungültige Anmeldeinformationen",
+      "serverError": "Interner Serverfehler"
     },
     "cannotActivateWithoutTemplate": "Cannot activate automation without a template"
   },

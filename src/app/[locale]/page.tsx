@@ -289,8 +289,9 @@ export default function HomePage() {
           }
           return;
         }
+        console.log(data);
         setModalStatus('error');
-        setModalError(t('errors.serverError') || 'Server error occurred');
+        setModalError(data.error ? t(data.error) : t('errors.serverError') || 'Server error occurred');
       } else {
         setModalStatus('success');
         handleFormReset();

@@ -85,7 +85,8 @@
     "incompleteChildData": "Please fill in all data for each child",
     "serverError": "Server error occurred",
     "networkError": "Network error occurred",
-    "invalidCaptcha": "Bot check failed. Please try again."
+    "invalidCaptcha": "Bot check failed. Please try again.",
+    "emailAlreadyExists": "Email already exists"
   },
   "admin": {
     "login": {
