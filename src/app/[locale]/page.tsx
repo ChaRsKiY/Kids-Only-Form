@@ -289,7 +289,6 @@ export default function HomePage() {
           }
           return;
         }
-        console.log(data);
         setModalStatus('error');
         setModalError(data.error ? t(data.error) : t('errors.serverError') || 'Server error occurred');
       } else {
@@ -761,7 +760,7 @@ export default function HomePage() {
                 <span>
                   {t('form.agreeStart')}{' '}
                   <a 
-                    href={`/${locale}/privacy`} 
+                    href={`https://www.kidsonly.at/agb`} 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-primary hover:underline"
